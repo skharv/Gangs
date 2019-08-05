@@ -1,6 +1,2 @@
 ﻿  Engine.cpp
-  Main.cpp
-d:\simon\documents\github\gangs\gangs\main.cpp(11): warning C4101: 'e': unreferenced local variable
-  Generating Code...
-  LINK : D:\Simon\Documents\GitHub\Gangs\Debug\Gangs.exe not found or not built by the last incremental link; performing full link
   Gangs.vcxproj -> D:\Simon\Documents\GitHub\Gangs\Debug\Gangs.exe

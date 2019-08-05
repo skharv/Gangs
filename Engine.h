@@ -3,10 +3,17 @@
 
 #include <SFML\Graphics.hpp>
 
+#include "Camera.h"
+
 class Engine
 {
 private:
 	sf::RenderWindow *_window;
+	
+	Camera *_camera;
+	sf::Vector2f *_cameraDirection;
+
+	sf::RectangleShape *_rect;
 
 	bool Init();
 	void MainLoop();
