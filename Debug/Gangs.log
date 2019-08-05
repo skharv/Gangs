@@ -1,2 +1,13 @@
-﻿  Engine.cpp
+﻿  Grid.cpp
+d:\simon\documents\github\gangs\gangs\grid.cpp(9): warning C4018: '<': signed/unsigned mismatch
+d:\simon\documents\github\gangs\gangs\grid.cpp(21): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+d:\simon\documents\github\gangs\gangs\grid.cpp(27): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
   Gangs.vcxproj -> D:\Simon\Documents\GitHub\Gangs\Debug\Gangs.exe

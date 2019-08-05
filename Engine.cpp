@@ -1,7 +1,4 @@
-#include "pch.h"
 #include "Engine.h"
-
-#include <iostream>
 
 bool Engine::Init()
 {
@@ -11,9 +8,7 @@ bool Engine::Init()
 	_camera = new Camera(sf::Vector2f(1200, 768));
 	_cameraDirection = new sf::Vector2f(0, 0);
 
-	_rect = new sf::RectangleShape(sf::Vector2f(100, 100));
-	_rect->setOrigin(_rect->getSize().x / 2, _rect->getSize().y / 2);
-	_rect->setFillColor(sf::Color::White);
+	_grid = new Grid(sf::Vector2f(100, 100));
 
 	if (!_window)
 		return false;
@@ -45,13 +40,13 @@ void Engine::ProcessInput()
 		if (evt.type == sf::Event::KeyPressed)
 		{
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-				_cameraDirection = new sf::Vector2f(0, 1);
+				_cameraDirection = new sf::Vector2f(0, 10);
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-				_cameraDirection = new sf::Vector2f(0, -1);
+				_cameraDirection = new sf::Vector2f(0, -10);
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-				_cameraDirection = new sf::Vector2f(-1, 0);
+				_cameraDirection = new sf::Vector2f(-10, 0);
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-				_cameraDirection = new sf::Vector2f(1, 0);
+				_cameraDirection = new sf::Vector2f(10, 0);
 		}
 		else
 			_cameraDirection = new sf::Vector2f(0, 0);
@@ -67,7 +62,7 @@ void Engine::Update()
 void Engine::RenderFrame()
 {
 	_window->clear(sf::Color().Black);
-	_window->draw(*_rect);
+	_grid->Draw(*_window);
 	_window->display();
 }
 

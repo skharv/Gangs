@@ -4,6 +4,7 @@
 #include <SFML\Graphics.hpp>
 
 #include "Camera.h"
+#include "Grid.h"
 
 class Engine
 {
@@ -13,7 +14,7 @@ private:
 	Camera *_camera;
 	sf::Vector2f *_cameraDirection;
 
-	sf::RectangleShape *_rect;
+	Grid *_grid;
 
 	bool Init();
 	void MainLoop();
