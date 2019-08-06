@@ -20,6 +20,13 @@ bool Engine::Init()
 	_utility = new Utility();
 	_utility->setGridSize(_grid->GetSize());
 
+	_toolbarUtility = new ToolbarUtility();
+
+	_assetLoader = new AssetLoader(_toolbarUtility);
+	_assetLoader->CreateToolbars();
+
+	//teaSet?
+
 	if (!_window)
 		return false;
 
@@ -57,6 +64,13 @@ void Engine::ProcessInput()
 			_camera->AddToMoveDirection(-1, 0);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 			_camera->AddToMoveDirection(1, 0);
+
+		//Edit mode
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+			_camera->AddToMoveDirection(1, 0);
+		 
+		//mouse click
+		_mouse->Click("",_toolbarUtility->GetActiveOptions());
 	}
 }
 

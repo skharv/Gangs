@@ -8,6 +8,8 @@
 #include "Grid.h"
 #include "Utility.h"
 #include "Mouse.h"
+#include "AssetLoader.h"
+#include "ToolbarUtility.h"
 
 class Engine
 {
@@ -21,6 +23,10 @@ private:
 	Mouse *_mouse;
 
 	Utility *_utility;
+
+	AssetLoader *_assetLoader;
+
+	ToolbarUtility *_toolbarUtility;
 
 	bool Init();
 	void MainLoop();
