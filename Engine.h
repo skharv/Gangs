@@ -3,8 +3,11 @@
 
 #include <SFML\Graphics.hpp>
 
+
 #include "Camera.h"
 #include "Grid.h"
+#include "Utility.h"
+#include "Mouse.h"
 
 class Engine
 {
@@ -12,9 +15,12 @@ private:
 	sf::RenderWindow *_window;
 	
 	Camera *_camera;
-	sf::Vector2f *_cameraDirection;
 
 	Grid *_grid;
+
+	Mouse *_mouse;
+
+	Utility *_utility;
 
 	bool Init();
 	void MainLoop();
@@ -22,8 +28,8 @@ private:
 	void RenderFrame();
 	void Update();
 public:
-	Engine();
-	~Engine();
+	Engine() {};
+	~Engine() {};
 
 	void Go();
 };
