@@ -1,7 +1,2 @@
-﻿  Mouse.cpp
-d:\simon\documents\github\gangs\gangs\mouse.cpp(18): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
+﻿  Engine.cpp
   Gangs.vcxproj -> D:\Simon\Documents\GitHub\Gangs\Debug\Gangs.exe

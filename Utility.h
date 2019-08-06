@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+// This class should probs be static so it's shit can be called from anywhere.
+
 class Utility
 {
 private:
