@@ -22,10 +22,11 @@ private:
 	void InActive();
 public:
 	Option();
-	Option(ToolbarUtility* u, std::string f, std::vector<std::string> params);
-	Option(ToolbarUtility* u, std::string active_function, std::vector<std::string> active_params, std::string inactive_function, std::vector<std::string> inactive_params);
+	Option(ToolbarUtility* u, std::string f, std::vector<std::string> params, sf::Vector2f pos, sf::Vector2i size, sf::Color imageFile);
+	Option(ToolbarUtility* u, std::string active_function, std::vector<std::string> active_params, std::string inactive_function, std::vector<std::string> inactive_params, sf::Vector2f pos, sf::Vector2i size, sf::Color imageFile);
 	void Draw(sf::RenderWindow &Window);
 	void Click();
+	sf::RectangleShape GetButtonShape();
 	~Option();
 };
 

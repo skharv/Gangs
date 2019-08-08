@@ -16,6 +16,8 @@ public:
 
 	void setGridSize(sf::Vector2f GirdSize) { _gridSize = GirdSize; };
 	void setGridSize(float GridX, float GridY) { _gridSize = sf::Vector2f(GridX, GridY); };
+	bool RectPoint(sf::RectangleShape rect, sf::Vector2f point);
+	bool RectRect(sf::RectangleShape rectA, sf::RectangleShape rectB);
 
 	Utility() { _gridSize = sf::Vector2f(0, 0); _gridRatio = 0; };
 	~Utility() {};

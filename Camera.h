@@ -14,6 +14,7 @@ private:
 	float _moveSpeed;
 public:
 	sf::View GetCamera() { return _view; };
+	sf::Vector2f GetPosition() { return _position; };
 	sf::Vector2f GetStartPoint() { return sf::Vector2f(_view.getCenter().x - _view.getSize().x / 2, _view.getCenter().y - _view.getSize().y / 2); };
 	sf::RectangleShape GetViewWindow() { return _viewWindow; };
 

@@ -13,17 +13,18 @@ private:
 	bool _visible = false;
 	sf::Texture _bgTexture;
 	sf::Sprite _bgSprite;
-	std::string activeOptionSet;
+	std::string _activeOptionSet;
 	std::map <std::string, std::vector<Option*>> _optionSets;
 public:
 	void Update();
 	void Draw(sf::RenderWindow &Window);
 	void ShowToolbar(std::string optionSet);
-	void HideToolbar() { _visible = false; }
+	void HideToolbar();
 	void AddOptionSet(std::string name, std::vector<Option*> option);
 	//something something visibility?
-	std::vector<Option*> GetActiveOptionSet() { return _optionSets[activeOptionSet]; }
+	std::vector<Option*> GetActiveOptionSet() { return _optionSets[_activeOptionSet]; }
 
+	Toolbar(sf::Vector2f pos, sf::Vector2i size, sf::Color imageFile);
 	Toolbar();
 	~Toolbar();
 };

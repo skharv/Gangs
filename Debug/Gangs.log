@@ -1,17 +1,42 @@
 ﻿  AssetLoader.cpp
+d:\work in progress\gangs\gangs\assetloader.cpp(27): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\work in progress\gangs\gangs\assetloader.cpp(29): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\work in progress\gangs\gangs\assetloader.cpp(31): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\work in progress\gangs\gangs\assetloader.cpp(33): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\work in progress\gangs\gangs\assetloader.cpp(35): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
   Engine.cpp
   Main.cpp
 d:\work in progress\gangs\gangs\main.cpp(11): warning C4101: 'e': unreferenced local variable
   Mouse.cpp
-d:\work in progress\gangs\gangs\mouse.cpp(25): warning C4018: '<': signed/unsigned mismatch
-d:\work in progress\gangs\gangs\mouse.cpp(42): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+d:\work in progress\gangs\gangs\mouse.cpp(42): warning C4018: '<': signed/unsigned mismatch
+d:\work in progress\gangs\gangs\mouse.cpp(75): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=unsigned int
           ]
   Option.cpp
   Toolbar.cpp
-d:\work in progress\gangs\gangs\toolbar.cpp(12): warning C4018: '<': signed/unsigned mismatch
+d:\work in progress\gangs\gangs\toolbar.cpp(14): warning C4018: '<': signed/unsigned mismatch
   ToolbarUtility.cpp
   Generating Code...
   Gangs.vcxproj -> D:\Work In Progress\Gangs\Gangs\Debug\Gangs.exe

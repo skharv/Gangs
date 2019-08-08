@@ -5,6 +5,13 @@ void ToolbarUtility::SetToolbarReferences(std::map <std::string, Toolbar*>* teaS
 	_toolbars = teaSet;
 }
 
+void ToolbarUtility::Draw(sf::RenderWindow &Window)
+{
+	std::map <std::string, Toolbar*>::iterator it;
+	for (it = _toolbars->begin(); it != _toolbars->end(); it++)
+		it->second->Draw(Window);
+}
+
 void ToolbarUtility::ButtonAction(std::string function, std::vector<std::string> params)
 {
 	if (function == "TriggerToolbar")
@@ -15,16 +22,26 @@ void ToolbarUtility::ButtonAction(std::string function, std::vector<std::string>
 	{
 		HideToolbar(_toolbars->at(params[0]));
 	}
+	if (function == "SetMouseState")
+	{
+		SetMouseState(params[0]);
+	}
 }
 
 void ToolbarUtility::TriggerToolbar(Toolbar* t, std::string options)
 {
 	t->ShowToolbar(options);
-	_activeOptions.push_back(t->GetActiveOptionSet());
+	if (std::find(_activeOptions.begin(), _activeOptions.end(), t->GetActiveOptionSet()) == _activeOptions.end())
+		_activeOptions.push_back(t->GetActiveOptionSet());
 }
 
 void ToolbarUtility::HideToolbar(Toolbar* t)
 {
 	t->HideToolbar();
 	_activeOptions.erase(std::remove(_activeOptions.begin(), _activeOptions.end(), t->GetActiveOptionSet()), _activeOptions.end());
+}
+
+void ToolbarUtility::SetMouseState(std::string state)
+{
+	_mouse->SetMouseState(state);
 }

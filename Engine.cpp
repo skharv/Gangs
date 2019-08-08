@@ -13,19 +13,17 @@ bool Engine::Init()
 	// Set the grid with a set size
 	_grid = new Grid(sf::Vector2f(100, 100));
 
-	// Set the mouse with it's image
-	_mouse = new Mouse("images/gridsection.png");
-
 	// Set up the utility class (which should probably be static instead)
 	_utility = new Utility();
 	_utility->setGridSize(_grid->GetSize());
 
-	_toolbarUtility = new ToolbarUtility();
+	// Set the mouse with it's image
+	_mouse = new Mouse("images/gridsection.png", _utility);
+
+	_toolbarUtility = new ToolbarUtility(_mouse);
 
 	_assetLoader = new AssetLoader(_toolbarUtility);
-	_assetLoader->CreateToolbars();
-
-	//teaSet?
+	_toolbarUtility->SetToolbarReferences(_assetLoader->CreateToolbars());
 
 	if (!_window)
 		return false;
@@ -67,36 +65,29 @@ void Engine::ProcessInput()
 
 		//Edit mode
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-			_camera->AddToMoveDirection(1, 0);
-		 
-		//mouse click
-		_mouse->Click("",_toolbarUtility->GetActiveOptions());
+			_toolbarUtility->ButtonAction("TriggerToolbar", std::vector<std::string>{ "BasicEditor","BasicEditor" });
+
+		if (evt.type == sf::Event::MouseButtonReleased && evt.mouseButton.button == sf::Mouse::Left)
+		{
+			_mouse->Click("", _toolbarUtility->GetActiveOptions(), *_window);
+		}
 	}
 }
 
 void Engine::Update()
 {
 	_camera->Update(*_window);
-
-	/* The mouse pos.
-		To set the mouse "cursor" to land directly on a tile space
-		you get the position of the mouse relative to the window,
-		then you convert the world position of the mouse into the grid coords.
-		After that you convert them BACK to world coords. This snaps the cursor
-		to the specific tile. 
-
-		This should probs go in the mouse class.
-	*/
-	sf::Vector2f mousePos = _window->mapPixelToCoords(sf::Mouse::getPosition(*_window));
-	mousePos = _utility->WorldToGrid(mousePos);
-	mousePos = _utility->GridToWorld(mousePos);
-	_mouse->Update(mousePos);
+	_mouse->Update(_window);
+	//update UI positions based on camera
 }
 
 void Engine::RenderFrame()
 {
 	_window->clear(sf::Color(186, 158, 111, 255));
 	_grid->Draw(*_window);
+	_mouse->Draw(*_window);
+	_toolbarUtility->Draw(*_window);
+	//UI Mouse
 	_mouse->Draw(*_window);
 	_window->display();
 }

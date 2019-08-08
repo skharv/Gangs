@@ -10,7 +10,7 @@ class AssetLoader
 private:
 public:
 	ToolbarUtility* util;
-	std::map <std::string, Toolbar*> CreateToolbars();
+	std::map <std::string, Toolbar*>* CreateToolbars();
 	AssetLoader();
 	AssetLoader(ToolbarUtility *_toolbarUtility);
 	~AssetLoader();
