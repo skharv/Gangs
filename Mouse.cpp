@@ -10,7 +10,7 @@
 void Mouse::Update(sf::RenderWindow* Window)
 {
 	sf::Vector2f mousePos = Window->mapPixelToCoords(sf::Mouse::getPosition(*Window));
-	std::cout << mousePos.x << ", " << mousePos.y << std::endl;
+	//std::cout << mousePos.x << ", " << mousePos.y << std::endl;
 	_position = _utility->GridToWorld(_utility->WorldToGrid(mousePos));
 	_sprite.setPosition(_position);
 }
@@ -23,7 +23,7 @@ void Mouse::Draw(sf::RenderWindow &Window)
 void Mouse::Click(std::string mouseState, std::vector <std::vector<Option*>>* activeOptions, sf::RenderWindow& Window)
 {
 	sf::Vector2f mousePos = Window.mapPixelToCoords(sf::Mouse::getPosition(Window));
-	std::cout << "CLICK! " << mousePos.x << ", " << mousePos.y << std::endl;
+	//std::cout << "CLICK! " << mousePos.x << ", " << mousePos.y << std::endl;
 	if (!CheckButtonClick(activeOptions, mousePos))
 	{
 		if (_mouseState.substr(0, 4) == "ZONE")

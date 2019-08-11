@@ -14,17 +14,21 @@ private:
 	sf::Texture _bgTexture;
 	sf::Sprite _bgSprite;
 	std::string _activeOptionSet;
+	std::string _primaryOptionSet;
 	std::map <std::string, std::vector<Option*>> _optionSets;
+	sf::Vector2f _position;
+	sf::Keyboard::Key _shortCut;
 public:
-	void Update();
+	void Update(sf::Vector2f camPos);
 	void Draw(sf::RenderWindow &Window);
 	void ShowToolbar(std::string optionSet);
 	void HideToolbar();
 	void AddOptionSet(std::string name, std::vector<Option*> option);
-	//something something visibility?
-	std::vector<Option*> GetActiveOptionSet() { return _optionSets[_activeOptionSet]; }
+	bool CheckShortCutKeys();
+	std::vector<Option*> GetActiveOptionSet();
 
 	Toolbar(sf::Vector2f pos, sf::Vector2i size, sf::Color imageFile);
+	Toolbar(sf::Vector2f pos, sf::Vector2i size, sf::Color imageFile, sf::Keyboard::Key shortCut, std::string primary);
 	Toolbar();
 	~Toolbar();
 };

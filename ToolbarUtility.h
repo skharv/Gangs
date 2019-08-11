@@ -25,6 +25,8 @@ public:
 	void SetToolbarReferences(std::map <std::string, Toolbar*>* teaSet);
 	void ButtonAction(std::string function, std::vector<std::string> params);
 	void Draw(sf::RenderWindow &Window);
+	void Update(sf::Vector2f camPos);
+	void CheckShortCutKeys();
 	std::vector <std::vector<Option*>>* GetActiveOptions() { return &_activeOptions; }
 };
 

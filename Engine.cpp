@@ -53,19 +53,20 @@ void Engine::ProcessInput()
 		if (evt.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			_window->close();
 
-		// Camera movement (it's a bit shit atm)
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-			_camera->AddToMoveDirection(0, 1);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-			_camera->AddToMoveDirection(0, -1);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-			_camera->AddToMoveDirection(-1, 0);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			_camera->AddToMoveDirection(1, 0);
+		if (evt.type == sf::Event::KeyPressed)
+		{
+			// Camera movement (it's a bit shit atm)
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+				_camera->AddToMoveDirection(0, 1);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+				_camera->AddToMoveDirection(0, -1);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+				_camera->AddToMoveDirection(-1, 0);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+				_camera->AddToMoveDirection(1, 0);
 
-		//Edit mode
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-			_toolbarUtility->ButtonAction("TriggerToolbar", std::vector<std::string>{ "BasicEditor","BasicEditor" });
+			_toolbarUtility->CheckShortCutKeys();
+		}
 
 		if (evt.type == sf::Event::MouseButtonReleased && evt.mouseButton.button == sf::Mouse::Left)
 		{
@@ -78,6 +79,7 @@ void Engine::Update()
 {
 	_camera->Update(*_window);
 	_mouse->Update(_window);
+	_toolbarUtility->Update(_camera->GetPosition());
 	//update UI positions based on camera
 }
 

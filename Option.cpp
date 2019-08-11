@@ -9,16 +9,36 @@ Option::Option()
 {
 }
 
-Option::Option(ToolbarUtility* u, std::string active_function, std::vector<std::string> active_params, sf::Vector2f pos, sf::Vector2i size, sf::Color imageFile)
+void Option::Update(sf::Vector2f camPos)
+{
+	_sprite.setPosition(_position.x + camPos.x, _position.y + camPos.y);
+}
+
+Option::Option(ToolbarUtility* u, std::string active_function, std::vector<std::string> active_params, sf::Vector2f pos, sf::Vector2i size, sf::Color imageFile, sf::Keyboard::Key shortCut)
 {
 	_util = u;
 	_activefunction = active_function;
 	_activeParams = active_params;
 	_inactivefunction = "";
 	_sprite.setTextureRect(sf::IntRect(sf::Vector2i(0, 0), size));
-	_sprite.setPosition(pos);
+	_position = pos;
 	_sprite.setTexture(_texture);
 	_sprite.setColor(imageFile);
+	_shortCut = shortCut;
+}
+
+Option::Option(ToolbarUtility* u, std::string active_function, std::vector<std::string> active_params, std::string inactive_function, std::vector<std::string> inactive_params, sf::Vector2f pos, sf::Vector2i size, sf::Color imageFile, sf::Keyboard::Key shortCut)
+{
+	_util = u;
+	_activefunction = active_function;
+	_activeParams = active_params;
+	_inactivefunction = inactive_function;
+	_inactiveParams = inactive_params;
+	_sprite.setTextureRect(sf::IntRect(sf::Vector2i(0,0), size));
+	_position = pos;
+	_sprite.setTexture(_texture);
+	_sprite.setColor(imageFile);
+	_shortCut = shortCut;
 }
 
 Option::Option(ToolbarUtility* u, std::string active_function, std::vector<std::string> active_params, std::string inactive_function, std::vector<std::string> inactive_params, sf::Vector2f pos, sf::Vector2i size, sf::Color imageFile)
@@ -28,10 +48,11 @@ Option::Option(ToolbarUtility* u, std::string active_function, std::vector<std::
 	_activeParams = active_params;
 	_inactivefunction = inactive_function;
 	_inactiveParams = inactive_params;
-	_sprite.setTextureRect(sf::IntRect(sf::Vector2i(0,0), size));
-	_sprite.setPosition(pos);
+	_sprite.setTextureRect(sf::IntRect(sf::Vector2i(0, 0), size));
+	_position = pos;
 	_sprite.setTexture(_texture);
 	_sprite.setColor(imageFile);
+	_shortCut = sf::Keyboard::Escape;
 }
 
 void Option::Active()
