@@ -20,12 +20,13 @@ void Mouse::Draw(sf::RenderWindow &Window)
 	Window.draw(_sprite);
 }
 
-void Mouse::Click(std::string mouseState, std::vector <std::vector<Option*>>* activeOptions, sf::RenderWindow& Window)
+void Mouse::Click(std::string mouseState, sf::RenderWindow& Window)
 {
 	sf::Vector2f mousePos = Window.mapPixelToCoords(sf::Mouse::getPosition(Window));
 	//std::cout << "CLICK! " << mousePos.x << ", " << mousePos.y << std::endl;
-	if (!CheckButtonClick(activeOptions, mousePos))
+	if (!_toolbarUtility->CheckButtonClick(mousePos))
 	{
+		//get the tile
 		if (_mouseState.substr(0, 4) == "ZONE")
 			Zone(_mouseState.substr(5, _mouseState.length()));
 	}
@@ -34,24 +35,6 @@ void Mouse::Click(std::string mouseState, std::vector <std::vector<Option*>>* ac
 void Mouse::SetMouseState(std::string state)
 {
 	_mouseState = state;
-}
-
-bool Mouse::CheckButtonClick(std::vector <std::vector<Option*>>* activeOptions, sf::Vector2f mousePos)
-{
-	//check activeOptions for intersect - that button is pressed
-	for (int x = 0; x < activeOptions->size(); x++)
-	{
-		int optionSetSize = activeOptions->at(x).size();
-		for (int y = 0; y < optionSetSize; y++)
-		{
-			if (_utility->RectPoint(activeOptions->at(x).at(y)->GetButtonShape(), mousePos))
-			{
-				activeOptions->at(x).at(y)->Click();
-				return true;
-			}
-		}
-	}
-	return false;
 }
 
 void Mouse::Zone(std::string s)
@@ -67,14 +50,16 @@ void Mouse::UpdateCursorPos()
 
 }
 
-Mouse::Mouse(std::string FilePath, Utility* utility)
+Mouse::Mouse(std::string FilePath, Utility* utility, ToolbarUtility* toolbarUtil, Grid* grid)
 {
+	_toolbarUtility = toolbarUtil;
 	_utility = utility;
 	_texture.loadFromFile(FilePath);
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_texture.getSize().x / 2, _texture.getSize().y / 2);
 	_sprite.setColor(sf::Color::Green);
 	_position = sf::Vector2f(0, 0);
+	_grid = grid;
 }
 
 

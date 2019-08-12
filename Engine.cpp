@@ -18,9 +18,10 @@ bool Engine::Init()
 	_utility->setGridSize(_grid->GetSize());
 
 	// Set the mouse with it's image
-	_mouse = new Mouse("images/gridsection.png", _utility);
+	_toolbarUtility = new ToolbarUtility(_grid);
+	_mouse = new Mouse("images/gridsection.png", _utility,_toolbarUtility, _grid);
 
-	_toolbarUtility = new ToolbarUtility(_mouse);
+	_toolbarUtility->SetMouseReference(_mouse);
 
 	_assetLoader = new AssetLoader(_toolbarUtility);
 	_toolbarUtility->SetToolbarReferences(_assetLoader->CreateToolbars());
@@ -70,7 +71,7 @@ void Engine::ProcessInput()
 
 		if (evt.type == sf::Event::MouseButtonReleased && evt.mouseButton.button == sf::Mouse::Left)
 		{
-			_mouse->Click("", _toolbarUtility->GetActiveOptions(), *_window);
+			_mouse->Click("", *_window);
 		}
 	}
 }

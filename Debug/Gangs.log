@@ -1,27 +1,8 @@
-﻿  AssetLoader.cpp
-d:\work in progress\gangs\gangs\assetloader.cpp(37): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-d:\work in progress\gangs\gangs\assetloader.cpp(39): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-d:\work in progress\gangs\gangs\assetloader.cpp(41): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-d:\work in progress\gangs\gangs\assetloader.cpp(43): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-d:\work in progress\gangs\gangs\assetloader.cpp(45): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
+﻿  Option.cpp
+  Toolbar.cpp
+d:\work in progress\gangs\gangs\toolbar.cpp(10): warning C4018: '<': signed/unsigned mismatch
+d:\work in progress\gangs\gangs\toolbar.cpp(37): warning C4018: '<': signed/unsigned mismatch
+d:\work in progress\gangs\gangs\toolbar.cpp(68): warning C4018: '<': signed/unsigned mismatch
+d:\work in progress\gangs\gangs\toolbar.cpp(104): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
   Gangs.vcxproj -> D:\Work In Progress\Gangs\Gangs\Debug\Gangs.exe
