@@ -45,7 +45,7 @@ std::map <std::string, Toolbar*>* AssetLoader::CreateToolbars()
 	//Market button
 	basicEditor_Options.push_back(new Option(util, "TriggerToolbar", std::vector<std::string>{"ExtendedEditor", "Market"}, "HideToolbar", std::vector<std::string>{"ExtendedEditor"}, sf::Vector2f(x + 32, y + 32), size, "greenButton.png", sf::Keyboard::Num4));
 	//Misc button
-	basicEditor_Options.push_back(new Option(util, "TriggerToolbar", std::vector<std::string>{"ExtendedEditor", "Misc"}, "HideToolbar", std::vector<std::string>{"ExtendedEditor"}, sf::Vector2f(x, y + 64), size, "yellowButton.png", sf::Keyboard::Num5));
+	basicEditor_Options.push_back(new Option(util, "TriggerToolbar", std::vector<std::string>{"ExtendedEditor", "Terrain"}, "HideToolbar", std::vector<std::string>{"ExtendedEditor"}, sf::Vector2f(x, y + 64), size, "yellowButton.png", sf::Keyboard::Num5));
 	
 	Toolbar* basicEditor = new Toolbar(sf::Vector2f(-585,200), sf::Vector2i(75,110),"BasicEditor.png", utility);
 	basicEditor->AddOptionSet("BasicEditor", basicEditor_Options);
@@ -75,16 +75,17 @@ std::map <std::string, Toolbar*>* AssetLoader::CreateToolbars()
 	market_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"ZONE_MARKET"}, pos, size, "greenButton.png", sf::Keyboard::Numpad1));
 
 	//Misc toolbar
-	std::vector<Option*> misc_Options;
+	std::vector<Option*> terrain_Options;
 	//Misc button
-	misc_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"ZONE_MISC"}, pos, size, "yellowButton.png", sf::Keyboard::Numpad1));
+	terrain_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"ZONE_DIRT"}, pos, size, "yellowButton.png", sf::Keyboard::Numpad1));
+	terrain_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"ZONE_ROAD"}, sf::Vector2f(pos.x + 51, pos.y), size, "yellowButton.png", sf::Keyboard::Numpad2));
 
 	Toolbar* extendedEditor = new Toolbar(sf::Vector2f(-585, 315), sf::Vector2i(300, 60), "ExtendedEditor.png", utility);
 	extendedEditor->AddOptionSet("Residential", residential_Options);
 	extendedEditor->AddOptionSet("GenericBusiness", genericBusiness_Options);
 	extendedEditor->AddOptionSet("KeyBusiness", keyBusiness_Options);
 	extendedEditor->AddOptionSet("Market", market_Options);
-	extendedEditor->AddOptionSet("Misc", misc_Options);
+	extendedEditor->AddOptionSet("Terrain", terrain_Options);
 	toolBarMap->insert(std::pair<std::string, Toolbar*>("ExtendedEditor", extendedEditor));
 
 	return toolBarMap;

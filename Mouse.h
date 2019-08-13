@@ -23,7 +23,7 @@ private:
 	sf::Vector2f _position;
 	std::string _mouseState;
 
-	void Zone(std::string s);
+	void Zone(std::string s, Tile* t);
 public:
 	void Update(sf::RenderWindow* Window);
 	void Draw(sf::RenderWindow &Window);

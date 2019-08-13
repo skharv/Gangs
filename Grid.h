@@ -15,7 +15,7 @@ class Grid
 {
 private:
 	Utility _utility;
-
+	sf::Vector2f _gridSize;
 	sf::Texture _texture;
 	sf::Sprite _sprite;
 	Utility* _util;
@@ -26,9 +26,7 @@ public:
 
 	sf::Vector2f GetSize() { return sf::Vector2f(TILEX, TILEY); };
 
-	Tile* GetTile(sf::Vector2f Position) { return _tiles[Position.x][Position.y]; };
-	//sf::Sprite GetTile(sf::Vector2f pos); Commented out during the accidental scary ass merge
-	//sf::Vector2f GetSize() { return sf::Vector2f(TILEX, TILEY); }; Commented out during the accidental scary ass merge
+	Tile* GetTile(sf::Vector2f Position);
 
 	Grid(sf::Vector2f GridSize);
 	Grid();

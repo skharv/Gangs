@@ -87,8 +87,23 @@ void Grid::Draw(sf::RenderWindow &Window)
 	}
 }
 
+Tile* Grid::GetTile(sf::Vector2f Position)
+{ 
+	Position = _utility.GridToWorld(_utility.WorldToGrid(Position));
+	for (int i = 0; i < _tiles.size(); i++)
+	{
+		for (int j = 0; j < _tiles[i].size(); j++)
+		{
+			if(_tiles[i][j]->GetPosition() == Position)
+				return _tiles[i][j];
+		}
+	}
+	return NULL;
+}
+
 Grid::Grid(sf::Vector2f GridSize)
 {
+	_gridSize = GridSize;
 	_utility = Utility();
 	_utility.setGridSize(sf::Vector2f(TILEX, TILEY));
 	_texture.loadFromFile("images/deserttileset.png");
@@ -139,12 +154,6 @@ Grid::Grid(sf::Vector2f GridSize)
 		_tiles.push_back(column);
 	}
 }
-
-// Commented out during the accidental scary ass merge
-//sf::Sprite Grid::GetTile(sf::Vector2f pos) 
-//{
-//	return sf::Sprite();
-//}
 
 Grid::Grid()
 {

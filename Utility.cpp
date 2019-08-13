@@ -25,7 +25,7 @@ public:
 
 			if (_projection < min)
 				min = _projection;
-			if (_projection > max);
+			if (_projection > max)
 				max = _projection;
 		}
 	}
@@ -55,7 +55,7 @@ bool Utility::RectPoint(sf::RectangleShape rect, sf::Vector2f point)
 {
 	if (rect.getSize().x == 0 && rect.getSize().y == 0)
 		return false;
-	sf::RectangleShape pointRect;
+	sf::RectangleShape pointRect(sf::Vector2f(1,1));
 	pointRect.setPosition(point);
 
 	return RectRect(rect, pointRect);

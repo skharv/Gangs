@@ -24,8 +24,6 @@ private:
 	int _index;
 	int _roadValue; //this name will change
 	sf::Vector2f _position;
-
-	//std::vector<Tile*> _connections; // north = 0, east = 1, south = 2, west = 3;
 public:
 	void SetIndex(int i) { _index = i; };
 	int GetIndex() { return _index; };
@@ -37,7 +35,6 @@ public:
 	sf::Vector2f GetPosition() { return _position; };
 
 	void AddConnection(Tile * Tile, Direction D);
-	//Tile* GetConnection(int i) { return _connections[i]; };
 
 	Tile(int Index, sf::Vector2f Position);
 	Tile();
