@@ -27,8 +27,8 @@ public:
 	sf::Vector2f GetSize() { return sf::Vector2f(TILEX, TILEY); };
 
 	Tile* GetTile(sf::Vector2f Position) { return _tiles[Position.x][Position.y]; };
-	sf::Sprite GetTile(sf::Vector2f pos);
-	sf::Vector2f GetSize() { return sf::Vector2f(_texture.getSize()); };
+	//sf::Sprite GetTile(sf::Vector2f pos); Commented out during the accidental scary ass merge
+	//sf::Vector2f GetSize() { return sf::Vector2f(TILEX, TILEY); }; Commented out during the accidental scary ass merge
 
 	Grid(sf::Vector2f GridSize);
 	Grid();

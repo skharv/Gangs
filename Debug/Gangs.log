@@ -1,0 +1,93 @@
+﻿  AssetLoader.cpp
+d:\simon\documents\github\gangs\gangs\grid.h(29): warning C4244: 'argument': conversion from 'T' to 'const unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\simon\documents\github\gangs\gangs\assetloader.cpp(40): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\simon\documents\github\gangs\gangs\assetloader.cpp(42): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\simon\documents\github\gangs\gangs\assetloader.cpp(44): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\simon\documents\github\gangs\gangs\assetloader.cpp(46): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\simon\documents\github\gangs\gangs\assetloader.cpp(48): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  Engine.cpp
+d:\simon\documents\github\gangs\gangs\grid.h(29): warning C4244: 'argument': conversion from 'T' to 'const unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+  Grid.cpp
+d:\simon\documents\github\gangs\gangs\grid.h(29): warning C4244: 'argument': conversion from 'T' to 'const unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\simon\documents\github\gangs\gangs\grid.cpp(5): warning C4018: '<': signed/unsigned mismatch
+d:\simon\documents\github\gangs\gangs\grid.cpp(7): warning C4018: '<': signed/unsigned mismatch
+d:\simon\documents\github\gangs\gangs\grid.cpp(98): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+d:\simon\documents\github\gangs\gangs\grid.cpp(108): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  Main.cpp
+d:\simon\documents\github\gangs\gangs\grid.h(29): warning C4244: 'argument': conversion from 'T' to 'const unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\simon\documents\github\gangs\gangs\main.cpp(11): warning C4101: 'e': unreferenced local variable
+  Mouse.cpp
+d:\simon\documents\github\gangs\gangs\grid.h(29): warning C4244: 'argument': conversion from 'T' to 'const unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\simon\documents\github\gangs\gangs\mouse.cpp(59): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+  Option.cpp
+d:\simon\documents\github\gangs\gangs\grid.h(29): warning C4244: 'argument': conversion from 'T' to 'const unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+  Toolbar.cpp
+d:\simon\documents\github\gangs\gangs\grid.h(29): warning C4244: 'argument': conversion from 'T' to 'const unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\simon\documents\github\gangs\gangs\toolbar.cpp(10): warning C4018: '<': signed/unsigned mismatch
+d:\simon\documents\github\gangs\gangs\toolbar.cpp(37): warning C4018: '<': signed/unsigned mismatch
+d:\simon\documents\github\gangs\gangs\toolbar.cpp(68): warning C4018: '<': signed/unsigned mismatch
+d:\simon\documents\github\gangs\gangs\toolbar.cpp(104): warning C4018: '<': signed/unsigned mismatch
+  ToolbarUtility.cpp
+d:\simon\documents\github\gangs\gangs\grid.h(29): warning C4244: 'argument': conversion from 'T' to 'const unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+  Generating Code...
+  Gangs.vcxproj -> D:\Simon\Documents\GitHub\Gangs\Debug\Gangs.exe
