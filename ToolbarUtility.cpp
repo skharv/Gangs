@@ -49,18 +49,28 @@ void ToolbarUtility::Update(sf::Vector2f camPos)
 void ToolbarUtility::TriggerToolbar(Toolbar* t, std::string options)
 {
 	t->ShowToolbar(options);
-	if (std::find(_activeOptions.begin(), _activeOptions.end(), t->GetActiveOptionSet()) == _activeOptions.end())
-		_activeOptions.push_back(t->GetActiveOptionSet());
 }
 
 void ToolbarUtility::HideToolbar(Toolbar* t)
 {
+	//hides passed through toolbar and makes the active button inactive to hide sub toolbars
 	t->HideToolbar();
-	//extend this to hide sub toolbars too
-	_activeOptions.erase(std::remove(_activeOptions.begin(), _activeOptions.end(), t->GetActiveOptionSet()), _activeOptions.end());
 }
 
 void ToolbarUtility::SetMouseState(std::string state)
 {
 	_mouse->SetMouseState(state);
+}
+
+bool ToolbarUtility::CheckButtonClick(sf::Vector2f mousePos)
+{
+	//check activeOptions for intersect - that button is pressed
+	std::map <std::string, Toolbar*>::iterator it;
+	for (it = _toolbars->begin(); it != _toolbars->end(); it++)
+	{
+		bool result = it->second->CheckButtonClick(mousePos);
+		if (result)
+			return true;
+	}
+	return false;
 }

@@ -140,6 +140,11 @@ Grid::Grid(sf::Vector2f GridSize)
 	}
 }
 
+sf::Sprite Grid::GetTile(sf::Vector2f pos)
+{
+	return sf::Sprite();
+}
+
 Grid::Grid()
 {
 }

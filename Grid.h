@@ -8,6 +8,9 @@
 #define TILEX 64
 #define TILEY 32
 
+#include <SFML/Graphics.hpp>
+#include "Utility.h"
+
 class Grid
 {
 private:
@@ -15,6 +18,7 @@ private:
 
 	sf::Texture _texture;
 	sf::Sprite _sprite;
+	Utility* _util;
 
 	std::vector<std::vector<Tile*>> _tiles;
 public:
@@ -23,6 +27,8 @@ public:
 	sf::Vector2f GetSize() { return sf::Vector2f(TILEX, TILEY); };
 
 	Tile* GetTile(sf::Vector2f Position) { return _tiles[Position.x][Position.y]; };
+	sf::Sprite GetTile(sf::Vector2f pos);
+	sf::Vector2f GetSize() { return sf::Vector2f(_texture.getSize()); };
 
 	Grid(sf::Vector2f GridSize);
 	Grid();

@@ -53,6 +53,8 @@ sf::Vector2f Utility::GridToWorld(sf::Vector2f GridPosition)
 
 bool Utility::RectPoint(sf::RectangleShape rect, sf::Vector2f point)
 {
+	if (rect.getSize().x == 0 && rect.getSize().y == 0)
+		return false;
 	sf::RectangleShape pointRect;
 	pointRect.setPosition(point);
 
