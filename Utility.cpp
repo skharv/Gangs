@@ -25,7 +25,7 @@ public:
 
 			if (_projection < min)
 				min = _projection;
-			if (_projection > max)
+			if (_projection > max);
 				max = _projection;
 		}
 	}

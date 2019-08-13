@@ -1,27 +1,2 @@
-﻿  AssetLoader.cpp
-d:\work in progress\gangs\gangs\assetloader.cpp(37): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-d:\work in progress\gangs\gangs\assetloader.cpp(39): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-d:\work in progress\gangs\gangs\assetloader.cpp(41): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-d:\work in progress\gangs\gangs\assetloader.cpp(43): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-d:\work in progress\gangs\gangs\assetloader.cpp(45): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-  Gangs.vcxproj -> D:\Work In Progress\Gangs\Gangs\Debug\Gangs.exe
+﻿  Tile.cpp
+  Gangs.vcxproj -> D:\Simon\Documents\GitHub\Gangs\Debug\Gangs.exe

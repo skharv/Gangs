@@ -166,6 +166,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Option.cpp" />
+    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Toolbar.cpp" />
     <ClCompile Include="ToolbarUtility.cpp" />
     <ClCompile Include="Utility.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Option.h" />
+    <ClInclude Include="Tile.h" />
     <ClInclude Include="Toolbar.h" />
     <ClInclude Include="ToolbarUtility.h" />
     <ClInclude Include="Utility.h" />

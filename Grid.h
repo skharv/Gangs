@@ -1,21 +1,28 @@
 #ifndef _GRID_H
 #define _GRID_H
 
+#include "Tile.h"
+#include "Utility.h"
 #include <vector>
-#include <SFML/Graphics.hpp>
+
+#define TILEX 64
+#define TILEY 32
 
 class Grid
 {
 private:
+	Utility _utility;
+
 	sf::Texture _texture;
 	sf::Sprite _sprite;
 
-	std::vector<sf::Vector2f> _positions;
+	std::vector<std::vector<Tile*>> _tiles;
 public:
-	void Update();
 	void Draw(sf::RenderWindow &Window);
 
-	sf::Vector2f GetSize() { return sf::Vector2f(_texture.getSize()); };
+	sf::Vector2f GetSize() { return sf::Vector2f(TILEX, TILEY); };
+
+	Tile* GetTile(sf::Vector2f Position) { return _tiles[Position.x][Position.y]; };
 
 	Grid(sf::Vector2f GridSize);
 	Grid();
