@@ -27,6 +27,7 @@ public:
 	sf::Vector2f GetSize() { return sf::Vector2f(TILEX, TILEY); };
 
 	Tile* GetTile(sf::Vector2f Position);
+	std::vector<Tile*> GetTile(sf::RectangleShape rect);
 
 	Grid(sf::Vector2f GridSize);
 	Grid();

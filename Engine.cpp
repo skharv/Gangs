@@ -71,7 +71,12 @@ void Engine::ProcessInput()
 
 		if (evt.type == sf::Event::MouseButtonReleased && evt.mouseButton.button == sf::Mouse::Left)
 		{
-			_mouse->Click("", *_window);
+			_mouse->MouseUp();
+			_mouse->Click(*_window);
+		}
+		if (evt.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			_mouse->MouseDown(*_window);
 		}
 	}
 }
@@ -88,10 +93,10 @@ void Engine::RenderFrame()
 {
 	_window->clear(sf::Color(186, 158, 111, 255));
 	_grid->Draw(*_window);
-	_mouse->Draw(*_window);
+	_mouse->DrawUnder(*_window);
 	_toolbarUtility->Draw(*_window);
 	//UI Mouse
-	_mouse->Draw(*_window);
+	//_mouse->DrawOver(*_window);
 	_window->display();
 }
 

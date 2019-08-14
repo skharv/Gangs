@@ -19,21 +19,27 @@ private:
 	Grid* _grid;
 	ToolbarUtility *_toolbarUtility;
 	sf::Texture _texture;
-	sf::Sprite _sprite;
+	sf::Sprite _gridSprite;
+	sf::Sprite _pointerSprite;
 	sf::Vector2f _position;
 	std::string _mouseState;
-
-	void Zone(std::string s, Tile* t);
+	bool _mousePressed;
+	sf::Vector2f _mouseStart;
+	sf::RectangleShape _mouseSelect;
+	void Zone(std::string s, std::vector<Tile*> t);
+	int GetZoneCode(std::string s);
+	void EditModeMouse(bool mouseIsPoint, sf::Vector2f mousePos, sf::RectangleShape shape);
 public:
 	void Update(sf::RenderWindow* Window);
-	void Draw(sf::RenderWindow &Window);
+	void DrawOver(sf::RenderWindow &Window);
+	void DrawUnder(sf::RenderWindow &Window);
 
+	void MouseUp();
 	void SetPosition(sf::Vector2f Position) { _position = Position; };
-	void Click(std::string mouseState, sf::RenderWindow& Window);
-
+	void Click(sf::RenderWindow& Window);
+	void MouseDown(sf::RenderWindow& Window);
 	void SetMouseState(std::string state);
 
-	void UpdateCursorPos();
 	Mouse(std::string FilePath, Utility* utility, ToolbarUtility* toolbarUtil, Grid* grid);
 	Mouse();
 	~Mouse();

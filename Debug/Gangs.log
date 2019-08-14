@@ -1,7 +1,46 @@
-﻿  Mouse.cpp
-d:\work in progress\gangs\gangs\mouse.cpp(69): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+﻿  AssetLoader.cpp
+d:\work in progress\gangs\gangs\assetloader.cpp(40): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\work in progress\gangs\gangs\assetloader.cpp(42): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\work in progress\gangs\gangs\assetloader.cpp(44): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\work in progress\gangs\gangs\assetloader.cpp(46): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\work in progress\gangs\gangs\assetloader.cpp(48): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  Engine.cpp
+  Main.cpp
+d:\work in progress\gangs\gangs\main.cpp(11): warning C4101: 'e': unreferenced local variable
+  Mouse.cpp
+d:\work in progress\gangs\gangs\mouse.cpp(87): warning C4018: '<': signed/unsigned mismatch
+d:\work in progress\gangs\gangs\mouse.cpp(114): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=unsigned int
           ]
+  Option.cpp
+  Toolbar.cpp
+d:\work in progress\gangs\gangs\toolbar.cpp(10): warning C4018: '<': signed/unsigned mismatch
+d:\work in progress\gangs\gangs\toolbar.cpp(37): warning C4018: '<': signed/unsigned mismatch
+d:\work in progress\gangs\gangs\toolbar.cpp(68): warning C4018: '<': signed/unsigned mismatch
+d:\work in progress\gangs\gangs\toolbar.cpp(104): warning C4018: '<': signed/unsigned mismatch
+  ToolbarUtility.cpp
+  Generating Code...
+d:\work in progress\gangs\gangs\mouse.cpp(106): warning C4715: 'Mouse::GetZoneCode': not all control paths return a value
   Gangs.vcxproj -> D:\Work In Progress\Gangs\Gangs\Debug\Gangs.exe

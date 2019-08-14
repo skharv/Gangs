@@ -101,6 +101,21 @@ Tile* Grid::GetTile(sf::Vector2f Position)
 	return NULL;
 }
 
+std::vector<Tile*> Grid::GetTile(sf::RectangleShape rect)
+{
+	std::vector<Tile*> selected;
+	rect.setPosition(_utility.GridToWorld(_utility.WorldToGrid(rect.getPosition())));
+	for (int i = 0; i < _tiles.size(); i++)
+	{
+		for (int j = 0; j < _tiles[i].size(); j++)
+		{
+			if (_utility.RectPoint(rect, _tiles[i][j]->GetPosition()))
+				selected.push_back(_tiles[i][j]);
+		}
+	}
+	return selected;
+}
+
 Grid::Grid(sf::Vector2f GridSize)
 {
 	_gridSize = GridSize;

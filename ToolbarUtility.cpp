@@ -62,15 +62,18 @@ void ToolbarUtility::SetMouseState(std::string state)
 	_mouse->SetMouseState(state);
 }
 
-bool ToolbarUtility::CheckButtonClick(sf::Vector2f mousePos)
+bool ToolbarUtility::CheckButtonClick(sf::Vector2f mousePos, bool mouseIsPoint)
 {
-	//check activeOptions for intersect - that button is pressed
-	std::map <std::string, Toolbar*>::iterator it;
-	for (it = _toolbars->begin(); it != _toolbars->end(); it++)
+	if (mouseIsPoint)
 	{
-		bool result = it->second->CheckButtonClick(mousePos);
-		if (result)
-			return true;
+		//check activeOptions for intersect - that button is pressed
+		std::map <std::string, Toolbar*>::iterator it;
+		for (it = _toolbars->begin(); it != _toolbars->end(); it++)
+		{
+			bool result = it->second->CheckButtonClick(mousePos);
+			if (result)
+				return true;
+		}
 	}
 	return false;
 }

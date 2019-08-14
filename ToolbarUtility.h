@@ -28,7 +28,7 @@ public:
 	void Draw(sf::RenderWindow &Window);
 	void Update(sf::Vector2f camPos);
 	void CheckShortCutKeys();
-	bool CheckButtonClick(sf::Vector2f mousePos);
+	bool CheckButtonClick(sf::Vector2f mousePos, bool mouseIsPoint);
 };
 
 #endif
