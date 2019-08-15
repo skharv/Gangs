@@ -7,10 +7,9 @@ class Camera
 {
 private:
 	sf::Vector2f _position, _size, _moveDirection;
-
 	sf::View _view;
+	sf::View _uiView;
 	sf::RectangleShape _viewWindow;
-
 	float _moveSpeed;
 public:
 	sf::View GetCamera() { return _view; };
@@ -24,7 +23,8 @@ public:
 	void SetZoom(float zoom) { _view.zoom(zoom); };
 	void SetPosition(sf::Vector2f Position) { _position = Position; };
 	void SetMoveSpeed(float Speed) { _moveSpeed = Speed; };
-
+	void setUIView(sf::RenderWindow &Window);
+	void setGridView(sf::RenderWindow &Window);
 	void Update(sf::RenderWindow & Window);
 
 	Camera(sf::Vector2f Size);

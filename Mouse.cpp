@@ -34,6 +34,8 @@ void Mouse::Update(sf::RenderWindow* Window)
 
 	if (_mouseMovePressed)
 	{
+		std::cout << "CAMERA POS: " << _camera->GetPosition().x << " " << _camera->GetPosition().y << std::endl;
+		std::cout << "MOUSE POS: " << mousePos.x << " " << mousePos.y << std::endl;
 		_camera->SetPosition(sf::Vector2f(_camera->GetPosition() + (_mouseMoveStart - mousePos)));
 	}
 	
@@ -79,13 +81,17 @@ void Mouse::MouseUp()
 void Mouse::Click(sf::RenderWindow& Window)
 {
 	sf::Vector2f mousePos = Window.mapPixelToCoords(sf::Mouse::getPosition(Window));
+	_camera->setUIView(Window);
+	sf::Vector2f uiMousePos = Window.mapPixelToCoords(sf::Mouse::getPosition(Window));
+	_camera->setGridView(Window);
+
 	bool mouseIsPoint = false;
 
 	if ((_mouseSelect.getSize().x < 5 && _mouseSelect.getSize().x > -5) && (_mouseSelect.getSize().y < 5 && _mouseSelect.getSize().y > -5))
 		mouseIsPoint = true;
 
 
-	if (!_toolbarUtility->CheckButtonClick(mousePos, mouseIsPoint))
+	if (!_toolbarUtility->CheckButtonClick(uiMousePos, mouseIsPoint))
 	{
 		//eventually check for game mode and send it to the relevant mouse action
 		EditModeMouse(mouseIsPoint, mousePos, _mouseSelect);

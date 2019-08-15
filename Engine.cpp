@@ -57,19 +57,15 @@ void Engine::ProcessInput()
 
 		if (evt.type == sf::Event::KeyPressed)
 		{
-			// Camera movement (it's a bit shit atm)
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-				_camera->AddToMoveDirection(0, 1);
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-				_camera->AddToMoveDirection(0, -1);
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-				_camera->AddToMoveDirection(-1, 0);
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-				_camera->AddToMoveDirection(1, 0);
-
 			_toolbarUtility->CheckShortCutKeys();
 		}
-
+		if (evt.type == sf::Event::MouseWheelMoved)
+		{
+			if(evt.mouseWheel.delta >= 1)
+				_camera->SetZoom(0.9);
+			if (evt.mouseWheel.delta <= 0)
+				_camera->SetZoom(1.1);
+		}
 		if (evt.type == sf::Event::MouseButtonReleased && evt.mouseButton.button == sf::Mouse::Left)
 		{
 			_mouse->MouseUp();
@@ -98,12 +94,17 @@ void Engine::Update()
 void Engine::RenderFrame()
 {
 	_window->clear(sf::Color(186, 158, 111, 255));
+
+	_camera->setGridView(*_window);
 	_grid->Draw(*_window);
 	//_squareGrid->Draw(*_window);
 	_mouse->DrawUnder(*_window);
+
+	_camera->setUIView(*_window);
 	_toolbarUtility->Draw(*_window);
 	//UI Mouse
 	//_mouse->DrawOver(*_window);
+	_camera->setGridView(*_window);
 	_window->display();
 }
 
