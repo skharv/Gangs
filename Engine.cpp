@@ -20,7 +20,7 @@ bool Engine::Init()
 
 	// Set the mouse with it's image
 	_toolbarUtility = new ToolbarUtility(_grid);
-	_mouse = new Mouse(_utility,_toolbarUtility, _grid);
+	_mouse = new Mouse(_utility,_toolbarUtility, _grid, _camera);
 
 	_toolbarUtility->SetMouseReference(_mouse);
 
@@ -79,14 +79,19 @@ void Engine::ProcessInput()
 		{
 			_mouse->MouseDown(*_window);
 		}
+
+		if (evt.type == sf::Event::MouseButtonReleased && evt.mouseButton.button == sf::Mouse::Middle)
+			_mouse->MouseMoveUp();
+		if (evt.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Middle))
+			_mouse->MouseMoveDown(*_window);
 	}
 }
 
 void Engine::Update()
 {
 	_camera->Update(*_window);
-	_mouse->Update(_window);
 	_toolbarUtility->Update(_camera->GetPosition());
+	_mouse->Update(_window);
 	//update UI positions based on camera
 }
 

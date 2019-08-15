@@ -156,10 +156,18 @@ std::vector<sf::Vector2f> Grid::IsoGetTileCorners(sf::RectangleShape rect)
 	std::vector<Tile*> tiles = IsoGetTiles(rect);
 	std::vector<sf::Vector2f> output;
 
-	sf::Vector2f left = tiles.front()->GetPosition();
-	sf::Vector2f top = tiles.front()->GetPosition();
-	sf::Vector2f right = tiles.front()->GetPosition();
-	sf::Vector2f bottom = tiles.front()->GetPosition();
+	sf::Vector2f left = sf::Vector2f(0, 0);
+	sf::Vector2f top = sf::Vector2f(0, 0);
+	sf::Vector2f right = sf::Vector2f(0, 0);
+	sf::Vector2f bottom = sf::Vector2f(0, 0);
+
+	if (tiles.size() != 0)
+	{
+		left = tiles.front()->GetPosition();
+		top = tiles.front()->GetPosition();
+		right = tiles.front()->GetPosition();
+		bottom = tiles.front()->GetPosition();
+	}
 
 	for (int i = 0; i < tiles.size(); i++)
 	{

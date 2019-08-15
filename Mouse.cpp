@@ -31,6 +31,11 @@ void Mouse::Update(sf::RenderWindow* Window)
 		_tileSelect.setPoint(2, sf::Vector2f(_position.x + (_grid->GetTileSize().x * 0.5), _position.y));
 		_tileSelect.setPoint(3, sf::Vector2f(_position.x, _position.y + (_grid->GetTileSize().y * 0.5)));
 	}
+
+	if (_mouseMovePressed)
+	{
+		_camera->SetPosition(sf::Vector2f(_camera->GetPosition() + (_mouseMoveStart - mousePos)));
+	}
 	
 	//_pointerSprite.setPosition(_position);
 }
@@ -41,6 +46,17 @@ void Mouse::DrawUnder(sf::RenderWindow &Window)
 	//	Window.draw(_mouseSelect);
 	//else
 	Window.draw(_tileSelect);
+}
+
+void Mouse::MouseMoveDown(sf::RenderWindow & Window)
+{
+	_mouseMoveStart = Window.mapPixelToCoords(sf::Mouse::getPosition(Window));
+	_mouseMovePressed = true;
+}
+
+void Mouse::MouseMoveUp()
+{
+	_mouseMovePressed = false;
 }
 
 void Mouse::DrawOver(sf::RenderWindow &Window)
@@ -121,7 +137,7 @@ int Mouse::GetZoneCode(std::string s)
 		return 1;
 }
 
-Mouse::Mouse(Utility* utility, ToolbarUtility* toolbarUtil, Grid* grid)
+Mouse::Mouse(Utility* utility, ToolbarUtility* toolbarUtil, Grid* grid, Camera* camera)
 {
 	_toolbarUtility = toolbarUtil;
 	_utility = utility;
@@ -142,6 +158,7 @@ Mouse::Mouse(Utility* utility, ToolbarUtility* toolbarUtil, Grid* grid)
 
 	_position = sf::Vector2f(0, 0);
 	_grid = grid;
+	_camera = camera;
 	_mousePressed = false;
 	_mouseSelect.setOutlineThickness(1);
 	_mouseSelect.setOutlineColor(sf::Color().Green);

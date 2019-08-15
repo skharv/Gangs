@@ -17,6 +17,7 @@ class Mouse
 private:
 	Utility *_utility;
 	Grid* _grid;
+	Camera* _camera;
 	ToolbarUtility *_toolbarUtility;
 	//sf::Sprite _pointerSprite;
 	sf::Vector2f _position;
@@ -26,6 +27,9 @@ private:
 	sf::RectangleShape _mouseSelect;
 	sf::ConvexShape _tileSelect;
 
+	bool _mouseMovePressed;
+	sf::Vector2f _mouseMoveStart;
+
 	void Zone(std::string s, std::vector<Tile*> t);
 	int GetZoneCode(std::string s);
 	void EditModeMouse(bool mouseIsPoint, sf::Vector2f mousePos, sf::RectangleShape shape);
@@ -34,13 +38,16 @@ public:
 	void DrawOver(sf::RenderWindow &Window);
 	void DrawUnder(sf::RenderWindow &Window);
 
+	void MouseMoveDown(sf::RenderWindow& Window);
+	void MouseMoveUp();
+
 	void MouseUp();
 	void SetPosition(sf::Vector2f Position) { _position = Position; };
 	void Click(sf::RenderWindow& Window);
 	void MouseDown(sf::RenderWindow& Window);
 	void SetMouseState(std::string state);
 
-	Mouse(Utility* utility, ToolbarUtility* toolbarUtil, Grid* grid);
+	Mouse(Utility* utility, ToolbarUtility* toolbarUtil, Grid* grid, Camera* camera);
 	Mouse();
 	~Mouse();
 };
