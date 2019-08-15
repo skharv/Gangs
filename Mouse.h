@@ -26,6 +26,8 @@ private:
 	bool _mousePressed;
 	sf::Vector2f _mouseStart;
 	sf::RectangleShape _mouseSelect;
+	sf::ConvexShape _tileSelect;
+
 	void Zone(std::string s, std::vector<Tile*> t);
 	int GetZoneCode(std::string s);
 	void EditModeMouse(bool mouseIsPoint, sf::Vector2f mousePos, sf::RectangleShape shape);

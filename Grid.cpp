@@ -101,19 +101,60 @@ Tile* Grid::GetTile(sf::Vector2f Position)
 	return NULL;
 }
 
-std::vector<Tile*> Grid::GetTile(sf::RectangleShape rect)
+std::vector<Tile*> Grid::IsoGetTiles(sf::RectangleShape rect)
 {
 	std::vector<Tile*> selected;
-	rect.setPosition(_utility.GridToWorld(_utility.WorldToGrid(rect.getPosition())));
+	rect.setPosition(_utility.WorldToGrid(rect.getPosition()));
+	rect.setSize(_utility.WorldToGrid(rect.getSize()));
+
+	int minX = std::min(rect.getPosition().x, rect.getPosition().x - rect.getSize().x);
+	int minY = std::min(rect.getPosition().y, rect.getPosition().y - rect.getSize().y);
+	int maxX = std::max(rect.getPosition().x, rect.getPosition().x - rect.getSize().x);
+	int maxY = std::max(rect.getPosition().y, rect.getPosition().y - rect.getSize().y);
+
 	for (int i = 0; i < _tiles.size(); i++)
 	{
 		for (int j = 0; j < _tiles[i].size(); j++)
 		{
-			if (_utility.RectPoint(rect, _tiles[i][j]->GetPosition()))
-				selected.push_back(_tiles[i][j]);
+			if (i >= minX && i <= maxX)
+				if (j >= minY && j <= maxY)
+					selected.push_back(_tiles[i][j]);
 		}
 	}
 	return selected;
+}
+
+std::vector<sf::Vector2f> Grid::IsoGetTileCorners(sf::RectangleShape rect)
+{
+	std::vector<Tile*> tiles = IsoGetTiles(rect);
+	std::vector<sf::Vector2f> output;
+
+	sf::Vector2f left = tiles.front()->GetPosition();
+	sf::Vector2f top = tiles.front()->GetPosition();
+	sf::Vector2f right = tiles.front()->GetPosition();
+	sf::Vector2f bottom = tiles.front()->GetPosition();
+
+	for (int i = 0; i < tiles.size(); i++)
+	{
+		if (tiles[i]->GetPosition().x < left.x)
+			left = tiles[i]->GetPosition();
+
+		if (tiles[i]->GetPosition().y < top.y)
+			top = tiles[i]->GetPosition();
+
+		if (tiles[i]->GetPosition().x > right.x)
+			right = tiles[i]->GetPosition();
+
+		if (tiles[i]->GetPosition().y > bottom.y)
+			bottom = tiles[i]->GetPosition();
+	}
+
+	output.push_back(sf::Vector2f(left.x - (TILEX * 0.5), left.y));
+	output.push_back(sf::Vector2f(top.x, top.y - (TILEY * 0.5)));
+	output.push_back(sf::Vector2f(right.x + (TILEX * 0.5), right.y));
+	output.push_back(sf::Vector2f(bottom.x, bottom.y + (TILEY * 0.5)));
+
+	return output;
 }
 
 Grid::Grid(sf::Vector2f GridSize)
