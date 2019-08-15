@@ -5,17 +5,24 @@
 #include "Utility.h"
 #include <vector>
 
-#define TILEX 64
-#define TILEY 32
-
 #include <SFML/Graphics.hpp>
 #include "Utility.h"
+
+namespace gr
+{
+	enum GridType
+	{
+		ISOMETRIC = 0,
+		SQUARE = 1
+	};
+}
 
 class Grid
 {
 private:
+	gr::GridType _gridType;
 	Utility _utility;
-	sf::Vector2f _gridSize;
+	sf::Vector2f _gridSize, _tileSize;
 	sf::Texture _texture;
 	sf::Sprite _sprite;
 	Utility* _util;
@@ -24,13 +31,14 @@ private:
 public:
 	void Draw(sf::RenderWindow &Window);
 
-	sf::Vector2f GetSize() { return sf::Vector2f(TILEX, TILEY); };
+	sf::Vector2f GetSize() { return sf::Vector2f(_tileSize.x, _tileSize.y); };
 
+	sf::Vector2f GetTileSize() { return _tileSize; };
 	Tile* GetTile(sf::Vector2f Position);
 	std::vector<Tile*> IsoGetTiles(sf::RectangleShape rect);
 	std::vector<sf::Vector2f> IsoGetTileCorners(sf::RectangleShape rect);
 
-	Grid(sf::Vector2f GridSize);
+	Grid(gr::GridType Type, sf::Vector2f GridSize, sf::Vector2f TileSize);
 	Grid();
 	~Grid();
 };

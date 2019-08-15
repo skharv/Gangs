@@ -31,7 +31,7 @@ public:
 	}
 };
 
-sf::Vector2f Utility::WorldToGrid(sf::Vector2f WorldPosition)
+sf::Vector2f Utility::IsoWorldToGrid(sf::Vector2f WorldPosition)
 {
 	sf::Vector2f GridPosition;
 
@@ -41,12 +41,32 @@ sf::Vector2f Utility::WorldToGrid(sf::Vector2f WorldPosition)
 	return GridPosition;
 }
 
-sf::Vector2f Utility::GridToWorld(sf::Vector2f GridPosition)
+sf::Vector2f Utility::IsoGridToWorld(sf::Vector2f GridPosition)
 {
 	sf::Vector2f WorldPosition;
 
 	WorldPosition.x = (GridPosition.x + GridPosition.y) * _gridSize.x * 0.5;
 	WorldPosition.y = (-GridPosition.x + GridPosition.y) * _gridSize.y * 0.5;
+
+	return WorldPosition;
+}
+
+sf::Vector2f Utility::SquareWorldToGrid(sf::Vector2f WorldPosition)
+{
+	sf::Vector2f GridPosition;
+
+	GridPosition.x = roundf(WorldPosition.x / (_gridSize.x));
+	GridPosition.y = roundf(WorldPosition.y / (_gridSize.y));
+
+	return GridPosition;
+}
+
+sf::Vector2f Utility::SquareGridToWorld(sf::Vector2f GridPosition)
+{
+	sf::Vector2f WorldPosition;
+
+	WorldPosition.x = roundf(GridPosition.x * (_gridSize.x));
+	WorldPosition.y = roundf(GridPosition.y * (_gridSize.y));
 
 	return WorldPosition;
 }

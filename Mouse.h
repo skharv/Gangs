@@ -18,9 +18,7 @@ private:
 	Utility *_utility;
 	Grid* _grid;
 	ToolbarUtility *_toolbarUtility;
-	sf::Texture _texture;
-	sf::Sprite _gridSprite;
-	sf::Sprite _pointerSprite;
+	//sf::Sprite _pointerSprite;
 	sf::Vector2f _position;
 	std::string _mouseState;
 	bool _mousePressed;
@@ -42,7 +40,7 @@ public:
 	void MouseDown(sf::RenderWindow& Window);
 	void SetMouseState(std::string state);
 
-	Mouse(std::string FilePath, Utility* utility, ToolbarUtility* toolbarUtil, Grid* grid);
+	Mouse(Utility* utility, ToolbarUtility* toolbarUtil, Grid* grid);
 	Mouse();
 	~Mouse();
 };

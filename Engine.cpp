@@ -11,7 +11,8 @@ bool Engine::Init()
 	_camera->SetMoveSpeed(20);
 
 	// Set the grid with a set size
-	_grid = new Grid(sf::Vector2f(100, 100));
+	_grid = new Grid(gr::ISOMETRIC, sf::Vector2f(100, 100), sf::Vector2f(64, 32));
+	//_squareGrid = new Grid(gr::SQUARE, sf::Vector2f(400, 200), sf::Vector2f(16, 16));
 
 	// Set up the utility class (which should probably be static instead)
 	_utility = new Utility();
@@ -19,7 +20,7 @@ bool Engine::Init()
 
 	// Set the mouse with it's image
 	_toolbarUtility = new ToolbarUtility(_grid);
-	_mouse = new Mouse("images/gridsection.png", _utility,_toolbarUtility, _grid);
+	_mouse = new Mouse(_utility,_toolbarUtility, _grid);
 
 	_toolbarUtility->SetMouseReference(_mouse);
 
@@ -93,6 +94,7 @@ void Engine::RenderFrame()
 {
 	_window->clear(sf::Color(186, 158, 111, 255));
 	_grid->Draw(*_window);
+	//_squareGrid->Draw(*_window);
 	_mouse->DrawUnder(*_window);
 	_toolbarUtility->Draw(*_window);
 	//UI Mouse

@@ -19,6 +19,7 @@ private:
 	Camera *_camera;
 
 	Grid *_grid;
+	//Grid *_squareGrid;
 
 	Mouse *_mouse;
 

@@ -11,25 +11,25 @@ void Mouse::Update(sf::RenderWindow* Window)
 {
 	sf::Vector2f mousePos = Window->mapPixelToCoords(sf::Mouse::getPosition(*Window));
 
-	_position = _utility->GridToWorld(_utility->WorldToGrid(mousePos));
-	//_gridSprite.setPosition(_position);
+	_position = _utility->IsoGridToWorld(_utility->IsoWorldToGrid(mousePos));
 
 	if (_mousePressed && (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)))
 		Click(*Window);
 	else if (_mousePressed)
 	{
 		_mouseSelect.setSize(sf::Vector2f(_mouseSelect.getPosition().x - mousePos.x, _mouseSelect.getPosition().y - mousePos.y));
-		std::vector<sf::Vector2f> points = _grid->IsoGetTileCorners(_mouseSelect);
+		
+		std::vector<sf::Vector2f> points = _grid->IsoGetTileCorners(_mouseSelect); //Using _mouseSelect is not super accurate for this purpose so it'll need to be updated, but whatever. It could be the iso tile bullshit not being accurate too. 
 		_tileSelect.setPointCount(points.size()); // Probably not needed
 		for (int i = 0; i < _tileSelect.getPointCount(); i++)
 			_tileSelect.setPoint(i, points[i]);
 	}
 	else
 	{
-		_tileSelect.setPoint(0, sf::Vector2f(_position.x - (TILEX * 0.5), _position.y));
-		_tileSelect.setPoint(1, sf::Vector2f(_position.x, _position.y - (TILEY * 0.5)));
-		_tileSelect.setPoint(2, sf::Vector2f(_position.x + (TILEX * 0.5), _position.y));
-		_tileSelect.setPoint(3, sf::Vector2f(_position.x, _position.y + (TILEY * 0.5)));
+		_tileSelect.setPoint(0, sf::Vector2f(_position.x - (_grid->GetTileSize().x * 0.5), _position.y));
+		_tileSelect.setPoint(1, sf::Vector2f(_position.x, _position.y - (_grid->GetTileSize().y * 0.5)));
+		_tileSelect.setPoint(2, sf::Vector2f(_position.x + (_grid->GetTileSize().x * 0.5), _position.y));
+		_tileSelect.setPoint(3, sf::Vector2f(_position.x, _position.y + (_grid->GetTileSize().y * 0.5)));
 	}
 	
 	//_pointerSprite.setPosition(_position);
@@ -40,12 +40,12 @@ void Mouse::DrawUnder(sf::RenderWindow &Window)
 	//if (_mousePressed)
 	//	Window.draw(_mouseSelect);
 	//else
-		Window.draw(_tileSelect);
+	Window.draw(_tileSelect);
 }
 
 void Mouse::DrawOver(sf::RenderWindow &Window)
 {
-	Window.draw(_pointerSprite);
+	//Window.draw(_pointerSprite);
 }
 
 void Mouse::MouseDown(sf::RenderWindow& Window)
@@ -121,14 +121,10 @@ int Mouse::GetZoneCode(std::string s)
 		return 1;
 }
 
-Mouse::Mouse(std::string FilePath, Utility* utility, ToolbarUtility* toolbarUtil, Grid* grid)
+Mouse::Mouse(Utility* utility, ToolbarUtility* toolbarUtil, Grid* grid)
 {
 	_toolbarUtility = toolbarUtil;
 	_utility = utility;
-	_texture.loadFromFile(FilePath);
-	_gridSprite.setTexture(_texture);
-	_gridSprite.setOrigin(_texture.getSize().x / 2, _texture.getSize().y / 2);
-	_gridSprite.setColor(sf::Color::Green);
 
 	//_texture.loadFromFile(FilePath);
 	//_pointerSprite.setTexture(_texture);
@@ -156,10 +152,6 @@ Mouse::Mouse(std::string FilePath, Utility* utility, ToolbarUtility* toolbarUtil
 
 Mouse::Mouse()
 {
-	_tileSelect.setOutlineThickness(1);
-	_tileSelect.setOutlineColor(sf::Color().Green);
-	_tileSelect.setFillColor(sf::Color().Transparent);
-	_tileSelect.setPointCount(4);
 }
 
 

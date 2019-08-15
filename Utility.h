@@ -11,8 +11,11 @@ private:
 	sf::Vector2f _gridSize;
 	float _gridRatio;
 public:
-	sf::Vector2f WorldToGrid(sf::Vector2f WorldPosition);
-	sf::Vector2f GridToWorld(sf::Vector2f GridPosition);
+	sf::Vector2f IsoWorldToGrid(sf::Vector2f WorldPosition);
+	sf::Vector2f IsoGridToWorld(sf::Vector2f GridPosition);
+
+	sf::Vector2f SquareWorldToGrid(sf::Vector2f WorldPosition);
+	sf::Vector2f SquareGridToWorld(sf::Vector2f GridPosition);
 
 	void setGridSize(sf::Vector2f GirdSize) { _gridSize = GirdSize; };
 	void setGridSize(float GridX, float GridY) { _gridSize = sf::Vector2f(GridX, GridY); };
