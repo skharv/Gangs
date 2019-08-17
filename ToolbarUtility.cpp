@@ -5,11 +5,35 @@ void ToolbarUtility::SetToolbarReferences(std::map <std::string, Toolbar*>* teaS
 	_toolbars = teaSet;
 }
 
-void ToolbarUtility::Draw(sf::RenderWindow &Window)
+void ToolbarUtility::DrawUI(sf::RenderWindow &Window)
 {
 	std::map <std::string, Toolbar*>::iterator it;
 	for (it = _toolbars->begin(); it != _toolbars->end(); it++)
 		it->second->Draw(Window);
+}
+
+void ToolbarUtility::DrawMap(sf::RenderWindow &Window)
+{
+	for (int x = 0; x < _buildings.size(); x++)
+	{
+		_buildings.at(x).Draw(Window);
+	}
+}
+
+void ToolbarUtility::AddBuilding(Building b)
+{
+	b.PlaceBuilding();
+	bool placed = false;
+	for (int x = 0; x < _buildings.size(); x++)
+	{
+		if (b.GetPosition().y > _buildings.at(x).GetPosition().y)
+			continue;
+		_buildings.insert(_buildings.begin() + x, b);
+		placed = true;
+		break;
+	}
+	if(!placed)
+		_buildings.push_back(b);
 }
 
 void ToolbarUtility::ButtonAction(std::string function, std::vector<std::string> params)

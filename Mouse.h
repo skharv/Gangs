@@ -2,6 +2,7 @@
 #define _MOUSE_H
 
 #include <SFML/Graphics.hpp>
+#include "Building.h"
 #include "Option.h"
 #include "Utility.h"
 #include "ToolbarUtility.h"
@@ -18,6 +19,7 @@ private:
 	Utility *_utility;
 	Grid* _grid;
 	Camera* _camera;
+	std::map <std::string, Building*>* _buildingPatterns;
 	ToolbarUtility *_toolbarUtility;
 	//sf::Sprite _pointerSprite;
 	sf::Vector2f _position;
@@ -26,10 +28,11 @@ private:
 	sf::Vector2f _mouseStart;
 	sf::RectangleShape _mouseSelect;
 	sf::ConvexShape _tileSelect;
+	Building* _activeBuilding;
 
 	bool _mouseMovePressed;
 	sf::Vector2f _mouseMoveStart;
-
+	void Build(std::string s);
 	void Zone(std::string s, std::vector<Tile*> t);
 	int GetZoneCode(std::string s);
 	void EditModeMouse(bool mouseIsPoint, sf::Vector2f mousePos, sf::RectangleShape shape);
@@ -37,10 +40,10 @@ public:
 	void Update(sf::RenderWindow* Window);
 	void DrawOver(sf::RenderWindow &Window);
 	void DrawUnder(sf::RenderWindow &Window);
-
+	void SetBuildingPatterns(std::map<std::string, Building*>* b);
 	void MouseMoveDown(sf::RenderWindow& Window);
 	void MouseMoveUp();
-
+	void ClearMouse();
 	void MouseUp();
 	void SetPosition(sf::Vector2f Position) { _position = Position; };
 	void Click(sf::RenderWindow& Window);

@@ -13,6 +13,23 @@ AssetLoader::~AssetLoader()
 {
 }
 
+std::map <std::string, Building*>* AssetLoader::CreateBuildingPatterns()
+{
+	std::map <std::string, Building*>* buildingPatterns = new std::map <std::string, Building*>();
+
+	Building* b = new Building("basicBuilding.png");
+	b->SetFootprint(std::vector<Util::Direction>{Util::North, Util::West, Util::South, Util::South, Util::East, Util::East, Util::North, Util::North});
+	b->SetOrigin(sf::Vector2f(96, 48));
+	buildingPatterns->insert(std::pair<std::string, Building*>("HOUSE",b));
+
+	b = new Building("basicBuilding1.png");
+	b->SetFootprint(std::vector<Util::Direction>{Util::North, Util::West, Util::South, Util::South, Util::East, Util::East, Util::North, Util::North});
+	b->SetOrigin(sf::Vector2f(96, 48));
+	buildingPatterns->insert(std::pair<std::string, Building*>("HOUSE1", b));
+
+
+	return buildingPatterns;
+}
 
 std::map <std::string, Toolbar*>* AssetLoader::CreateToolbars()
 {
@@ -72,7 +89,8 @@ std::map <std::string, Toolbar*>* AssetLoader::CreateToolbars()
 	//Market toolbar
 	std::vector<Option*> market_Options;
 	//Market button
-	market_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"ZONE_MARKET"}, pos, size, "greenButton.png", sf::Keyboard::Numpad1));
+	market_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"BUILD_HOUSE"}, pos, size, "greenButton.png", sf::Keyboard::Numpad1));
+	market_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"BUILD_HOUSE1"}, sf::Vector2f(pos.x + 51, pos.y), size, "greenButton.png", sf::Keyboard::Numpad2));
 
 	//Misc toolbar
 	std::vector<Option*> terrain_Options;

@@ -38,7 +38,8 @@ void Mouse::Update(sf::RenderWindow* Window)
 		std::cout << "MOUSE POS: " << mousePos.x << " " << mousePos.y << std::endl;
 		_camera->SetPosition(sf::Vector2f(_camera->GetPosition() + (_mouseMoveStart - mousePos)));
 	}
-	
+	if (_mouseState.substr(0, 5) == "BUILD")
+		_activeBuilding->PlacementUpdate(_grid->GetTile(mousePos));
 	//_pointerSprite.setPosition(_position);
 }
 
@@ -48,6 +49,8 @@ void Mouse::DrawUnder(sf::RenderWindow &Window)
 	//	Window.draw(_mouseSelect);
 	//else
 	Window.draw(_tileSelect);
+	if (_mouseState.substr(0, 5) == "BUILD")
+		_activeBuilding->Draw(Window);
 }
 
 void Mouse::MouseMoveDown(sf::RenderWindow & Window)
@@ -100,6 +103,11 @@ void Mouse::Click(sf::RenderWindow& Window)
 	_mouseSelect.setSize(sf::Vector2f(0, 0));
 }
 
+void Mouse::SetBuildingPatterns(std::map<std::string, Building*>* b)
+{
+	_buildingPatterns = b;
+}
+
 void Mouse::EditModeMouse(bool mouseIsPoint, sf::Vector2f mousePos, sf::RectangleShape shape)
 {
 	std::vector<Tile*> t;
@@ -111,12 +119,28 @@ void Mouse::EditModeMouse(bool mouseIsPoint, sf::Vector2f mousePos, sf::Rectangl
 	{
 		if (_mouseState.substr(0, 4) == "ZONE")
 			Zone(_mouseState.substr(5, _mouseState.length()), t);
+		if (_mouseState.substr(0, 5) == "BUILD")
+		{
+			if (_activeBuilding->ValidPlacement())
+			{
+				_toolbarUtility->AddBuilding(*_activeBuilding);
+			}
+		}
 	}
+}
+
+void Mouse::ClearMouse()
+{
+	_activeBuilding->CancelPlacement();
+	_mouseState = "";
+	_activeBuilding = NULL;
 }
 
 void Mouse::SetMouseState(std::string state)
 {
 	_mouseState = state;
+	if (_mouseState.substr(0, 5) == "BUILD")
+		Build(_mouseState.substr(6, _mouseState.length()));
 }
 
 void Mouse::Zone(std::string s, std::vector<Tile*> t)
@@ -127,6 +151,11 @@ void Mouse::Zone(std::string s, std::vector<Tile*> t)
 		if(t.at(x) != NULL)
 			t.at(x)->SetIndex(index);
 	}
+}
+
+void Mouse::Build(std::string s)
+{
+	_activeBuilding = _buildingPatterns->at(s);
 }
 
 int Mouse::GetZoneCode(std::string s)
@@ -147,7 +176,7 @@ Mouse::Mouse(Utility* utility, ToolbarUtility* toolbarUtil, Grid* grid, Camera* 
 {
 	_toolbarUtility = toolbarUtil;
 	_utility = utility;
-
+	_activeBuilding = NULL;
 	//_texture.loadFromFile(FilePath);
 	//_pointerSprite.setTexture(_texture);
 	//_pointerSprite.setOrigin(_texture.getSize().x / 2, _texture.getSize().y / 2);

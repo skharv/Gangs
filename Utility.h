@@ -5,6 +5,11 @@
 
 // This class should probs be static so it's shit can be called from anywhere.
 
+namespace Util
+{
+	enum Direction { North = 0, South = 1, East = 2, West = 3 };
+}
+
 class Utility
 {
 private:
@@ -16,7 +21,6 @@ public:
 
 	sf::Vector2f SquareWorldToGrid(sf::Vector2f WorldPosition);
 	sf::Vector2f SquareGridToWorld(sf::Vector2f GridPosition);
-
 	void setGridSize(sf::Vector2f GirdSize) { _gridSize = GirdSize; };
 	void setGridSize(float GridX, float GridY) { _gridSize = sf::Vector2f(GridX, GridY); };
 	bool RectPoint(sf::RectangleShape rect, sf::Vector2f point);

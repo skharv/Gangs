@@ -19,13 +19,14 @@ bool Engine::Init()
 	_utility->setGridSize(_grid->GetSize());
 
 	// Set the mouse with it's image
-	_toolbarUtility = new ToolbarUtility(_grid);
+	_toolbarUtility = new ToolbarUtility(_grid, _utility);
 	_mouse = new Mouse(_utility,_toolbarUtility, _grid, _camera);
 
 	_toolbarUtility->SetMouseReference(_mouse);
 
 	_assetLoader = new AssetLoader(_toolbarUtility);
 	_toolbarUtility->SetToolbarReferences(_assetLoader->CreateToolbars());
+	_mouse->SetBuildingPatterns(_assetLoader->CreateBuildingPatterns());
 
 	if (!_window)
 		return false;
@@ -76,6 +77,11 @@ void Engine::ProcessInput()
 			_mouse->MouseDown(*_window);
 		}
 
+		if (evt.type == sf::Event::MouseButtonReleased && evt.mouseButton.button == sf::Mouse::Right)
+		{
+			_mouse->ClearMouse();
+		}
+
 		if (evt.type == sf::Event::MouseButtonReleased && evt.mouseButton.button == sf::Mouse::Middle)
 			_mouse->MouseMoveUp();
 		if (evt.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Middle))
@@ -98,13 +104,15 @@ void Engine::RenderFrame()
 	_camera->setGridView(*_window);
 	_grid->Draw(*_window);
 	//_squareGrid->Draw(*_window);
+	_toolbarUtility->DrawMap(*_window);
 	_mouse->DrawUnder(*_window);
 
 	_camera->setUIView(*_window);
-	_toolbarUtility->Draw(*_window);
+	_toolbarUtility->DrawUI(*_window);
 	//UI Mouse
 	//_mouse->DrawOver(*_window);
 	_camera->setGridView(*_window);
+
 	_window->display();
 }
 

@@ -83,7 +83,7 @@ void Grid::Draw(sf::RenderWindow &Window)
 					_sprite.setTextureRect(sf::IntRect(192, 0, 64, 32));
 					break;
 				}
-
+				_sprite.setColor(_tiles[i][j]->GetColour());
 				Window.draw(_sprite);
 			}
 		}
@@ -226,29 +226,29 @@ Grid::Grid(gr::GridType Type, sf::Vector2f GridSize, sf::Vector2f TileSize)
 
 			//Set East-West Connections
 			if (i <= 0)
-				tile->AddConnection(tile, West);
+				tile->AddConnection(tile, Util::Direction::West);
 			else if (i > 0)
 			{
-				tile->AddConnection(_tiles[i - 1][j], West);
+				tile->AddConnection(_tiles[i - 1][j], Util::Direction::West);
 
-				_tiles[i - 1][j]->AddConnection(tile, East);
+				_tiles[i - 1][j]->AddConnection(tile, Util::Direction::East);
 			}
 
 			if (i == GridSize.x - 1)
-				tile->AddConnection(tile, East);
+				tile->AddConnection(tile, Util::Direction::East);
 
 			//Set North-South Connections
 			if (j <= 0)
-				tile->AddConnection(tile, North);
+				tile->AddConnection(tile, Util::Direction::North);
 			if (j > 0)
 			{
-				tile->AddConnection(column[j - 1], North);
+				tile->AddConnection(column[j - 1], Util::Direction::North);
 
-				column[j - 1]->AddConnection(tile, South);
+				column[j - 1]->AddConnection(tile, Util::Direction::South);
 			}
 
 			if (j == GridSize.y - 1)
-				tile->AddConnection(tile, South);
+				tile->AddConnection(tile, Util::Direction::South);
 				
 			column.push_back(tile);
 		}
