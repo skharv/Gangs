@@ -1,4 +1,1 @@
-﻿  ToolbarUtility.cpp
-d:\work in progress\gangs\gangs\toolbarutility.cpp(17): warning C4018: '<': signed/unsigned mismatch
-d:\work in progress\gangs\gangs\toolbarutility.cpp(27): warning C4018: '<': signed/unsigned mismatch
-  Gangs.vcxproj -> D:\Work In Progress\Gangs\Gangs\Debug\Gangs.exe
+﻿  Gangs.vcxproj -> D:\Simon\Documents\GitHub\Gangs\Debug\Gangs.exe
