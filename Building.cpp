@@ -65,7 +65,7 @@ void Building::PlaceBuilding()
 
 void Building::SetOrigin(sf::Vector2f origin)
 {
-	origin.y = _sprite.getPosition().y + _sprite.getTextureRect().width - origin.y;
+	origin.y = _sprite.getPosition().y + _sprite.getTextureRect().height - origin.y;
 	_sprite.setOrigin(origin);
 }
 

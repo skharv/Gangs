@@ -27,6 +27,16 @@ std::map <std::string, Building*>* AssetLoader::CreateBuildingPatterns()
 	b->SetOrigin(sf::Vector2f(96, 48));
 	buildingPatterns->insert(std::pair<std::string, Building*>("HOUSE1", b));
 
+	b = new Building("basicBuilding2.png");
+	b->SetFootprint(std::vector<Util::Direction>{Util::North, Util::West, Util::South, Util::South, Util::East, Util::East, Util::North, Util::North});
+	b->SetOrigin(sf::Vector2f(96, 48));
+	buildingPatterns->insert(std::pair<std::string, Building*>("HOUSE2", b));
+
+	b = new Building("basicBuilding3.png");
+	b->SetFootprint(std::vector<Util::Direction>{Util::East, Util::East, Util::East, Util::North, Util::West, Util::West, Util::West, Util::West, Util::South, Util::South, Util::East, Util::East});
+	b->SetOrigin(sf::Vector2f(96, 48));
+	buildingPatterns->insert(std::pair<std::string, Building*>("HOUSE3", b));
+
 
 	return buildingPatterns;
 }
@@ -91,6 +101,8 @@ std::map <std::string, Toolbar*>* AssetLoader::CreateToolbars()
 	//Market button
 	market_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"BUILD_HOUSE"}, "ClearMouse", std::vector<std::string>(), pos, size, "greenButton.png", sf::Keyboard::Numpad1));
 	market_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"BUILD_HOUSE1"}, "ClearMouse", std::vector<std::string>(), sf::Vector2f(pos.x + 51, pos.y), size, "greenButton.png", sf::Keyboard::Numpad2));
+	market_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"BUILD_HOUSE2"}, "ClearMouse", std::vector<std::string>(), sf::Vector2f(pos.x + 102, pos.y), size, "greenButton.png", sf::Keyboard::Numpad3));
+	market_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"BUILD_HOUSE3"}, "ClearMouse", std::vector<std::string>(), sf::Vector2f(pos.x + 153, pos.y), size, "greenButton.png", sf::Keyboard::Numpad4));
 
 	//Misc toolbar
 	std::vector<Option*> terrain_Options;
