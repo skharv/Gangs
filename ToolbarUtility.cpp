@@ -46,6 +46,10 @@ void ToolbarUtility::ButtonAction(std::string function, std::vector<std::string>
 	{
 		HideToolbar(_toolbars->at(params[0]));
 	}
+	if (function == "ClearMouse")
+	{
+		ClearMouse();
+	}
 	if (function == "SetMouseState")
 	{
 		SetMouseState(params[0]);
@@ -79,6 +83,11 @@ void ToolbarUtility::HideToolbar(Toolbar* t)
 {
 	//hides passed through toolbar and makes the active button inactive to hide sub toolbars
 	t->HideToolbar();
+}
+
+void ToolbarUtility::ClearMouse()
+{
+	_mouse->ClearMouse();
 }
 
 void ToolbarUtility::SetMouseState(std::string state)

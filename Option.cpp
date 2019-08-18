@@ -36,7 +36,6 @@ Option::Option(ToolbarUtility* u, std::string active_function, std::vector<std::
 	_activeParams = active_params;
 	_inactivefunction = inactive_function;
 	_inactiveParams = inactive_params;
-	_sprite.setTextureRect(sf::IntRect(sf::Vector2i(0,0), size));
 	_position = pos;
 	_texture.loadFromFile("images/" + imageFile);
 	float modX = float(size.x) / float(_texture.getSize().x);

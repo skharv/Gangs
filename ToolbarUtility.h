@@ -18,6 +18,7 @@ private:
 	std::map <std::string, Toolbar*>* _toolbars;
 	void TriggerToolbar(Toolbar* t, std::string options);
 	void HideToolbar(Toolbar* t);
+	void ClearMouse();
 	void SetMouseState(std::string state);
 	std::vector<Building> _buildings;
 	Mouse* _mouse;

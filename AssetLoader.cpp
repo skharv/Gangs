@@ -89,8 +89,8 @@ std::map <std::string, Toolbar*>* AssetLoader::CreateToolbars()
 	//Market toolbar
 	std::vector<Option*> market_Options;
 	//Market button
-	market_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"BUILD_HOUSE"}, pos, size, "greenButton.png", sf::Keyboard::Numpad1));
-	market_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"BUILD_HOUSE1"}, sf::Vector2f(pos.x + 51, pos.y), size, "greenButton.png", sf::Keyboard::Numpad2));
+	market_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"BUILD_HOUSE"}, "ClearMouse", std::vector<std::string>(), pos, size, "greenButton.png", sf::Keyboard::Numpad1));
+	market_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"BUILD_HOUSE1"}, "ClearMouse", std::vector<std::string>(), sf::Vector2f(pos.x + 51, pos.y), size, "greenButton.png", sf::Keyboard::Numpad2));
 
 	//Misc toolbar
 	std::vector<Option*> terrain_Options;
