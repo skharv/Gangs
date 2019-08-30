@@ -1,0 +1,82 @@
+#ifndef _UNIT_H
+#define _UNIT_H
+
+#include <SFML/Graphics.hpp>
+#include <stack>
+#include <iostream>
+
+#define DEFAULTFORWARD sf::Vector2f(0, -1)
+
+enum States
+{
+	IDLE = 0,
+	MOVE = 1,
+	ATTACK = 2
+};
+
+class Unit
+{
+private:
+	Unit					*_target = this;
+
+	// Where it is and where it's going:
+	sf::Vector2f				_origin;
+	sf::Vector2f				_position;
+	sf::Vector2f				_velocity;
+	std::stack<sf::Vector2f>	_destination;
+	sf::Vector2f				_newVelocity;
+	sf::Vector2f				_desiredVelocity;
+	sf::Vector2f				_steerForce;
+	sf::Vector2f				_forward;
+	sf::Vector2f				_neighbourInfluence;
+
+	float 						_moveSpeed = 5;
+	float 						_steerSpeed = 0.5;
+	float						_rotation = 0;
+	float						_attackRange = 300.0f;
+	float						_slowingDistance = 25.0f;
+	float						_neighbourDistance = 50.0f;
+	float						_stopDistance = 1.0f;
+
+	// Unit Stats:
+	int							_playerNumber;
+	States						_state = IDLE;
+	float 						_currentHealth;
+	float 						_healthTotal;
+	float						_healthPoint;
+	float 						_buildTime;
+
+	// What you see:
+	sf::Texture _texture;
+	sf::Sprite _sprite;
+
+	// Private functions:
+	float						GetMagnitude(sf::Vector2f v);
+	sf::Vector2f				Normalise(sf::Vector2f v);
+	sf::Vector2f				Truncate(sf::Vector2f v, float max);
+	sf::Vector2f				Seek(sf::Vector2f v);
+public:
+	void Draw(sf::RenderWindow &Window);
+	void Update();
+
+	int GetPlayerNumber() { return _playerNumber; };
+	float GetBuildTime() { return _buildTime; };
+	float GetMoveSpeed() { return _moveSpeed; };
+	float GetSteerSpeed() { return _steerSpeed; };
+	sf::Vector2f GetPosition() { return _position; };
+	sf::Vector2f GetVelocity() { return _velocity; };
+
+	void Separation(std::vector<Unit*> units);
+	void Alignment(std::vector<Unit*> units);
+	void Cohesion(std::vector<Unit*> units);
+
+	void Move(sf::Vector2f d, bool queue);
+	void Target(Unit *o);
+
+	Unit();
+	Unit(Unit * u);
+	Unit(std::string TextureLocation, sf::Vector2f Size);
+	~Unit();
+};
+
+#endif

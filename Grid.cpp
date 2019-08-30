@@ -217,12 +217,11 @@ Grid::Grid(gr::GridType Type, sf::Vector2f GridSize, sf::Vector2f TileSize)
 		for (int j = 0; j < GridSize.y; j++)
 		{
 			Tile* tile = new Tile();
-			int k = rand() % 2;
 
 			if (_gridType == gr::ISOMETRIC)
-				tile = new Tile(k, _utility.IsoGridToWorld(sf::Vector2f(i, j)));
+				tile = new Tile(0, _utility.IsoGridToWorld(sf::Vector2f(i, j)));
 			else if (_gridType == gr::SQUARE)
-				tile = new Tile(k, _utility.SquareGridToWorld(sf::Vector2f(i, j)));
+				tile = new Tile(0, _utility.SquareGridToWorld(sf::Vector2f(i, j)));
 
 			//Set East-West Connections
 			if (i <= 0)
