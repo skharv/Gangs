@@ -4,6 +4,9 @@
 #include <SFML/Graphics.hpp>
 #include <stack>
 #include <iostream>
+#include "Utility.h"
+#include "AStar.h"
+#include "Grid.h"
 
 #define DEFAULTFORWARD sf::Vector2f(0, -1)
 
@@ -17,13 +20,15 @@ enum States
 class Unit
 {
 private:
-	Unit					*_target = this;
+	Unit					   *_target = this;
+	Utility						_util;
 
 	// Where it is and where it's going:
 	sf::Vector2f				_origin;
 	sf::Vector2f				_position;
 	sf::Vector2f				_velocity;
-	std::stack<sf::Vector2f>	_destination;
+	//std::stack<sf::Vector2f>	_destination;
+	std::vector<sf::Vector2f>	_destination;
 	sf::Vector2f				_newVelocity;
 	sf::Vector2f				_desiredVelocity;
 	sf::Vector2f				_steerForce;
@@ -31,7 +36,7 @@ private:
 	sf::Vector2f				_neighbourInfluence;
 
 	float 						_moveSpeed = 5;
-	float 						_steerSpeed = 0.5;
+	float 						_steerSpeed = 5;
 	float						_rotation = 0;
 	float						_attackRange = 300.0f;
 	float						_slowingDistance = 25.0f;
@@ -47,8 +52,8 @@ private:
 	float 						_buildTime;
 
 	// What you see:
-	sf::Texture _texture;
-	sf::Sprite _sprite;
+	sf::Texture					_texture;
+	sf::Sprite					_sprite;
 
 	// Private functions:
 	float						GetMagnitude(sf::Vector2f v);
@@ -66,11 +71,13 @@ public:
 	sf::Vector2f GetPosition() { return _position; };
 	sf::Vector2f GetVelocity() { return _velocity; };
 
+	void SetPosition(int x, int y) { _position = sf::Vector2f(x, y); };
+
 	void Separation(std::vector<Unit*> units);
 	void Alignment(std::vector<Unit*> units);
 	void Cohesion(std::vector<Unit*> units);
 
-	void Move(sf::Vector2f d, bool queue);
+	void Move(Grid grid, sf::Vector2f dest, bool queue);
 	void Target(Unit *o);
 
 	Unit();

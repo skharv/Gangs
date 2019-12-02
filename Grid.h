@@ -31,9 +31,8 @@ private:
 public:
 	void Draw(sf::RenderWindow &Window);
 
-	sf::Vector2f GetSize() { return sf::Vector2f(_tileSize.x, _tileSize.y); };
-
 	sf::Vector2f GetTileSize() { return _tileSize; };
+	sf::Vector2f GetGridSize() { return _gridSize; };
 	Tile* GetTile(sf::Vector2f Position);
 	std::vector<Tile*> IsoGetTiles(sf::RectangleShape rect);
 	std::vector<sf::Vector2f> IsoGetTileCorners(sf::RectangleShape rect);

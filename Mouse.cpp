@@ -11,7 +11,7 @@ void Mouse::Update(sf::RenderWindow* Window)
 {
 	sf::Vector2f mousePos = Window->mapPixelToCoords(sf::Mouse::getPosition(*Window));
 
-	_position = _utility->IsoGridToWorld(_utility->IsoWorldToGrid(mousePos));
+	_position = _utility->IsoGridToWorld(_utility->IsoWorldToGrid(mousePos, _utility->getGridTileSize()), _utility->getGridTileSize());
 
 	if (_mousePressed && (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)))
 		Click(*Window);

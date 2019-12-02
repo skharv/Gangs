@@ -16,8 +16,8 @@ void Unit::Update()
 
 		if (GetMagnitude(_target->GetPosition() - _position) < _attackRange && _target->GetPlayerNumber() != _playerNumber)
 			_state = ATTACK;
-		_destination.pop();
-		_destination.push(_target->GetPosition());
+		_destination.pop_back();
+		_destination.push_back(_target->GetPosition());
 
 	}
 
@@ -26,12 +26,12 @@ void Unit::Update()
 	case IDLE:
 		break;
 	case MOVE:
-		_distance = GetMagnitude(_destination.top() - _position);
+		_distance = GetMagnitude(_destination.back() - _position);
 
 		if (_distance > _stopDistance)
 		{
-			_destination.top() += _neighbourInfluence;
-			_velocity = Seek(_destination.top());
+			_destination.back() += _neighbourInfluence;
+			_velocity = Seek(_destination.back());
 
 			_forward = Normalise(_velocity);
 			_rotation = atan2(_forward.y, _forward.x) * 180 / 3.14159;
@@ -40,13 +40,13 @@ void Unit::Update()
 
 			if (_distance < _slowingDistance && _destination.size() > 1)
 			{
-				_destination.pop();
+				_destination.pop_back();
 			}
 		}
 		else
 		{
 			if (_destination.size() > 1)
-				_destination.pop();
+				_destination.pop_back();
 			else
 				_state = IDLE;
 		}
@@ -282,38 +282,40 @@ void Unit::Cohesion(std::vector<Unit*> units)
 	}
 }
 
-void Unit::Move(sf::Vector2f d, bool queue)
+void Unit::Move(Grid grid, sf::Vector2f dest, bool queue)
 {
 	_state = MOVE;
 	_target = this;
 
-	if (!queue)
-	{
-		for (int i = 0; i < _destination.size(); i++)
-			_destination.pop();
-		_destination.push(d);
-	}
-	else
-	{
-		std::stack<sf::Vector2f> intermediary;
+	_destination = AStar::aStar(Utility::IsoWorldToGrid(GetPosition(), grid.GetTileSize()), Utility::IsoWorldToGrid(dest, grid.GetTileSize()), grid);
 
-		int size = _destination.size();
+	//if (!queue)
+	//{
+	//	for (int i = 0; i < _destination.size(); i++)
+	//		_destination.pop();
+	//	_destination.push(dest);
+	//}
+	//else
+	//{
+	//	std::stack<sf::Vector2f> intermediary;
 
-		for (int i = 0; i < size; i++)
-		{
-			intermediary.push(_destination.top());
-			_destination.pop();
-		}
+	//	int size = _destination.size();
 
-		intermediary.push(d);
-		size = intermediary.size();
+	//	for (int i = 0; i < size; i++)
+	//	{
+	//		intermediary.push(_destination.top());
+	//		_destination.pop();
+	//	}
 
-		for (int i = 0; i < size; i++)
-		{
-			_destination.push(intermediary.top());
-			intermediary.pop();
-		}
-	}
+	//	intermediary.push(dest);
+	//	size = intermediary.size();
+
+	//	for (int i = 0; i < size; i++)
+	//	{
+	//		_destination.push(intermediary.top());
+	//		intermediary.pop();
+	//	}
+	//}
 }
 
 void Unit::Target(Unit * o)

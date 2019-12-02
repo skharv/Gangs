@@ -116,7 +116,7 @@ void Grid::Draw(sf::RenderWindow &Window)
 
 Tile* Grid::GetTile(sf::Vector2f Position)
 { 
-	Position = _utility.IsoGridToWorld(_utility.IsoWorldToGrid(Position));
+	Position = _utility.IsoGridToWorld(_utility.IsoWorldToGrid(Position, _utility.getGridTileSize()), _utility.getGridTileSize());
 	for (int i = 0; i < _tiles.size(); i++)
 	{
 		for (int j = 0; j < _tiles[i].size(); j++)
@@ -131,8 +131,8 @@ Tile* Grid::GetTile(sf::Vector2f Position)
 std::vector<Tile*> Grid::IsoGetTiles(sf::RectangleShape rect)
 {
 	std::vector<Tile*> selected;
-	rect.setPosition(_utility.IsoWorldToGrid(rect.getPosition()));
-	rect.setSize(_utility.IsoWorldToGrid(rect.getSize()));
+	rect.setPosition(_utility.IsoWorldToGrid(rect.getPosition(), _utility.getGridTileSize()));
+	rect.setSize(_utility.IsoWorldToGrid(rect.getSize(), _utility.getGridTileSize()));
 
 	int minX = std::min(rect.getPosition().x, rect.getPosition().x - rect.getSize().x);
 	int minY = std::min(rect.getPosition().y, rect.getPosition().y - rect.getSize().y);
@@ -198,7 +198,8 @@ Grid::Grid(gr::GridType Type, sf::Vector2f GridSize, sf::Vector2f TileSize)
 	_gridSize = GridSize;
 	_tileSize = TileSize;
 	_utility = Utility();
-	_utility.setGridSize(sf::Vector2f(_tileSize.x, _tileSize.y));
+	_utility.setGridTileSize(sf::Vector2f(_tileSize.x, _tileSize.y));
+	_utility.setGridSize(sf::Vector2f(_gridSize.x, _gridSize.y));
 
 	if(_gridType == gr::ISOMETRIC)
 		_texture.loadFromFile("images/deserttileset.png");
@@ -219,9 +220,9 @@ Grid::Grid(gr::GridType Type, sf::Vector2f GridSize, sf::Vector2f TileSize)
 			Tile* tile = new Tile();
 
 			if (_gridType == gr::ISOMETRIC)
-				tile = new Tile(0, _utility.IsoGridToWorld(sf::Vector2f(i, j)));
+				tile = new Tile(0, _utility.IsoGridToWorld(sf::Vector2f(i, j), _utility.getGridTileSize()));
 			else if (_gridType == gr::SQUARE)
-				tile = new Tile(0, _utility.SquareGridToWorld(sf::Vector2f(i, j)));
+				tile = new Tile(0, _utility.SquareGridToWorld(sf::Vector2f(i, j), _utility.getGridTileSize()));
 
 			//Set East-West Connections
 			if (i <= 0)

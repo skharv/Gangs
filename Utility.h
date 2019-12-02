@@ -7,26 +7,32 @@
 
 namespace Util
 {
-	enum Direction { North = 0, South = 1, East = 2, West = 3 };
+	enum Direction { North = 0, South = 1, East = 2, West = 3, NorthEast = 4, SouthEast = 5, SouthWest = 6, NorthWest = 7 };
 }
 
 class Utility
 {
 private:
+	sf::Vector2f _gridTileSize;
 	sf::Vector2f _gridSize;
 	float _gridRatio;
 public:
-	sf::Vector2f IsoWorldToGrid(sf::Vector2f WorldPosition);
-	sf::Vector2f IsoGridToWorld(sf::Vector2f GridPosition);
+	static sf::Vector2f IsoWorldToGrid(sf::Vector2f WorldPosition, sf::Vector2f GridTileSize);
+	static sf::Vector2f IsoGridToWorld(sf::Vector2f GridPosition, sf::Vector2f GridTileSize);
 
-	sf::Vector2f SquareWorldToGrid(sf::Vector2f WorldPosition);
-	sf::Vector2f SquareGridToWorld(sf::Vector2f GridPosition);
+	static sf::Vector2f SquareWorldToGrid(sf::Vector2f WorldPosition, sf::Vector2f GridTileSize);
+	static sf::Vector2f SquareGridToWorld(sf::Vector2f GridPosition, sf::Vector2f GridTileSize);
+
+	sf::Vector2f getGridTileSize() { return _gridTileSize; };
+
+	void setGridTileSize(sf::Vector2f GirdTileSize) { _gridTileSize = GirdTileSize; };
+	void setGridTileSize(float GridTileX, float GridTileY) { _gridTileSize = sf::Vector2f(GridTileX, GridTileY); };
 	void setGridSize(sf::Vector2f GirdSize) { _gridSize = GirdSize; };
 	void setGridSize(float GridX, float GridY) { _gridSize = sf::Vector2f(GridX, GridY); };
 	bool RectPoint(sf::RectangleShape rect, sf::Vector2f point);
 	bool RectRect(sf::RectangleShape rectA, sf::RectangleShape rectB);
 
-	Utility() { _gridSize = sf::Vector2f(0, 0); _gridRatio = 0; };
+	Utility() { _gridTileSize = sf::Vector2f(0, 0); _gridRatio = 0; };
 	~Utility() {};
 };
 

@@ -15,10 +15,12 @@ bool Engine::Init()
 	//_squareGrid = new Grid(gr::SQUARE, sf::Vector2f(400, 200), sf::Vector2f(16, 16));
 
 	_unit = new Unit("images/basicUnit.png", sf::Vector2f(16, 32));
+	_unit->SetPosition(150, 0);
 
 	// Set up the utility class (which should probably be static instead)
 	_utility = new Utility();
-	_utility->setGridSize(_grid->GetSize());
+	_utility->setGridTileSize(_grid->GetTileSize());
+	_utility->setGridSize(_grid->GetGridSize());
 
 	// Set the mouse with it's image
 	_toolbarUtility = new ToolbarUtility(_grid, _utility);
@@ -60,7 +62,7 @@ void Engine::ProcessInput()
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 		{
-			_unit->Move(_window->mapPixelToCoords(sf::Mouse::getPosition(*_window)), false);
+			_unit->Move(*_grid, _window->mapPixelToCoords(sf::Mouse::getPosition(*_window)), true);
 		}
 
 		if (evt.type == sf::Event::KeyPressed)

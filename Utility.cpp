@@ -31,42 +31,42 @@ public:
 	}
 };
 
-sf::Vector2f Utility::IsoWorldToGrid(sf::Vector2f WorldPosition)
+sf::Vector2f Utility::IsoWorldToGrid(sf::Vector2f WorldPosition, sf::Vector2f GridTileSize)
 {
 	sf::Vector2f GridPosition;
 
-	GridPosition.x = roundf((0.5 * ((WorldPosition.x / (_gridSize.x * 0.5) - (WorldPosition.y / (_gridSize.y * 0.5))))));
-	GridPosition.y = roundf((0.5 * ((WorldPosition.x / (_gridSize.x * 0.5) + (WorldPosition.y / (_gridSize.y * 0.5))))));
+	GridPosition.x = roundf((0.5 * ((WorldPosition.x / (GridTileSize.x * 0.5) - (WorldPosition.y / (GridTileSize.y * 0.5))))));
+	GridPosition.y = roundf((0.5 * ((WorldPosition.x / (GridTileSize.x * 0.5) + (WorldPosition.y / (GridTileSize.y * 0.5))))));
 
 	return GridPosition;
 }
 
-sf::Vector2f Utility::IsoGridToWorld(sf::Vector2f GridPosition)
+sf::Vector2f Utility::IsoGridToWorld(sf::Vector2f GridPosition, sf::Vector2f GridTileSize)
 {
 	sf::Vector2f WorldPosition;
 
-	WorldPosition.x = (GridPosition.x + GridPosition.y) * _gridSize.x * 0.5;
-	WorldPosition.y = (-GridPosition.x + GridPosition.y) * _gridSize.y * 0.5;
+	WorldPosition.x = (GridPosition.x + GridPosition.y) * GridTileSize.x * 0.5;
+	WorldPosition.y = (-GridPosition.x + GridPosition.y) * GridTileSize.y * 0.5;
 
 	return WorldPosition;
 }
 
-sf::Vector2f Utility::SquareWorldToGrid(sf::Vector2f WorldPosition)
+sf::Vector2f Utility::SquareWorldToGrid(sf::Vector2f WorldPosition, sf::Vector2f GridTileSize)
 {
 	sf::Vector2f GridPosition;
 
-	GridPosition.x = roundf(WorldPosition.x / (_gridSize.x));
-	GridPosition.y = roundf(WorldPosition.y / (_gridSize.y));
+	GridPosition.x = roundf(WorldPosition.x / (GridTileSize.x));
+	GridPosition.y = roundf(WorldPosition.y / (GridTileSize.y));
 
 	return GridPosition;
 }
 
-sf::Vector2f Utility::SquareGridToWorld(sf::Vector2f GridPosition)
+sf::Vector2f Utility::SquareGridToWorld(sf::Vector2f GridPosition, sf::Vector2f GridTileSize)
 {
 	sf::Vector2f WorldPosition;
 
-	WorldPosition.x = roundf(GridPosition.x * (_gridSize.x));
-	WorldPosition.y = roundf(GridPosition.y * (_gridSize.y));
+	WorldPosition.x = roundf(GridPosition.x * (GridTileSize.x));
+	WorldPosition.y = roundf(GridPosition.y * (GridTileSize.y));
 
 	return WorldPosition;
 }
