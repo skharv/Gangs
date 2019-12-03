@@ -129,10 +129,6 @@ void Mouse::EditModeMouse(bool mouseIsPoint, sf::Vector2f mousePos, sf::Rectangl
 	}
 }
 
-std::string Mouse::GetKeyString(std::string s){
-	return _mouseState.substr(0, _mouseState.find_first_of('_'));
-}
-
 void Mouse::ClearMouse()
 {
 	_activeBuilding->CancelPlacement();
@@ -149,31 +145,10 @@ void Mouse::SetMouseState(std::string state)
 
 void Mouse::Zone(std::string s, std::vector<Tile*> t)
 {
-
-	int index = GetSocialClassCode(s);
+	int index = GetZoneCode(s);
 	for (int x = 0; x < t.size(); x++)
 	{
 		if(t.at(x) != NULL)
-			t.at(x)->SetIndex(index);
-	}
-}
-
-int Mouse::GetSocialClassCode(std::string s)
-{
-	if (s == "LOWINCOME")
-		return 2;
-	if (s == "MEDIUMINCOME")
-		return 3;
-	if (s == "HIGHINCOME")
-		return 4;
-}
-
-void Mouse::SetTileIndex(std::string s, std::vector<Tile*> t)
-{
-	int index = GetTileCode(s);
-	for (int x = 0; x < t.size(); x++)
-	{
-		if (t.at(x) != NULL)
 			t.at(x)->SetIndex(index);
 	}
 }
@@ -183,8 +158,14 @@ void Mouse::Build(std::string s)
 	_activeBuilding = _buildingPatterns->at(s);
 }
 
-int Mouse::GetTileCode(std::string s)
+int Mouse::GetZoneCode(std::string s)
 {
+	if (s == "RESIDENTIAL")
+		return 2;
+	if (s == "GENERICBUSINESS")
+		return 3;
+	if (s == "MARKET")
+		return 4;
 	if (s == "DIRT")
 		return 0;
 	if (s == "ROAD")

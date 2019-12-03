@@ -166,9 +166,7 @@
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mouse.cpp" />
-    <ClCompile Include="MouseState.cpp" />
     <ClCompile Include="Option.cpp" />
-    <ClCompile Include="OptionSet.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Toolbar.cpp" />
     <ClCompile Include="ToolbarUtility.cpp" />
@@ -181,9 +179,7 @@
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Mouse.h" />
-    <ClInclude Include="MouseState.h" />
     <ClInclude Include="Option.h" />
-    <ClInclude Include="OptionSet.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Toolbar.h" />
     <ClInclude Include="ToolbarUtility.h" />

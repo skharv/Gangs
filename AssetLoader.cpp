@@ -41,187 +41,82 @@ std::map <std::string, Building*>* AssetLoader::CreateBuildingPatterns()
 	return buildingPatterns;
 }
 
-Toolbar* AssetLoader::CreateToolbar(std::string name) {
-	Toolbar *t = new Toolbar(utility);
-	toolBarMap->insert(std::pair<std::string, Toolbar*>(name, t));
-	return t;
-}
-
 std::map <std::string, Toolbar*>* AssetLoader::CreateToolbars()
 {
-	utility = new Utility();
-	toolBarMap = new std::map <std::string, Toolbar*>();
+	Utility* utility = new Utility();
 
+	std::map <std::string, Toolbar*>* toolBarMap = new std::map <std::string, Toolbar*>();
+	//main UI options
+	std::vector<Option*> EditorUI_Options;
+	sf::Vector2i size = sf::Vector2i(0, 0);
+	EditorUI_Options.push_back(new Option(util, "TriggerToolbar", std::vector<std::string>{"BasicEditor", "BasicEditor"}, "HideToolbar", std::vector<std::string>{"BasicEditor"}, sf::Vector2f(0,0), size, "blank.png", sf::Keyboard::E));
 
-	Toolbar* EditorUI = CreateToolbar("EditorUI");
-	OptionSet* optionSet = EditorUI->AddOptionSet("EditorUI", util);
-
-	optionSet->AddOption()
-		->WithActiveFunction("TriggerToolbar")
-		->WithActiveParams(std::vector<std::string>{"BasicEditor", "BasicEditor"})
-		->WithShortcut(sf::Keyboard::E)
-		->WithInactiveFunction("HideToolbar")
-		->WithInactiveParams(std::vector<std::string>{"BasicEditor"});
-
+	Toolbar* EditorUI = new Toolbar(sf::Vector2f(0, 0), sf::Vector2i(0, 0), "blank.png", utility);
+	EditorUI->AddOptionSet("EditorUI", EditorUI_Options);
 	EditorUI->ShowToolbar("EditorUI");
 	EditorUI->SetInvisible();
+	toolBarMap->insert(std::pair<std::string, Toolbar*>("EditorUI", EditorUI));
 
-	Toolbar* basicEditor = CreateToolbar("BasicEditor")
-		->WithPosition(sf::Vector2f(-585, 200))
-		->WithSize(sf::Vector2i(75, 110))
-		->WithImage("BasicEditor.png");
+
+	//basic editor toolbar
+	std::vector<Option*> basicEditor_Options;
+	size = sf::Vector2i(30, 30);
+	int x = -578;
+	int y = 209;
+	//Residential button
+	basicEditor_Options.push_back(new Option(util, "TriggerToolbar", std::vector<std::string>{"ExtendedEditor", "Residential"}, "HideToolbar", std::vector<std::string>{"ExtendedEditor"}, sf::Vector2f(x,y), size, "redButton.png", sf::Keyboard::Num1));
+	//GenericBusiness button
+	basicEditor_Options.push_back(new Option(util, "TriggerToolbar", std::vector<std::string>{"ExtendedEditor", "GenericBusiness"}, "HideToolbar", std::vector<std::string>{"ExtendedEditor"}, sf::Vector2f(x+32, y), size, "blueButton.png", sf::Keyboard::Num2));
+	//KeyBusiness button
+	basicEditor_Options.push_back(new Option(util, "TriggerToolbar", std::vector<std::string>{"ExtendedEditor", "KeyBusiness"}, "HideToolbar", std::vector<std::string>{"ExtendedEditor"}, sf::Vector2f(x, y + 32), size, "cyanButton.png", sf::Keyboard::Num3));
+	//Market button
+	basicEditor_Options.push_back(new Option(util, "TriggerToolbar", std::vector<std::string>{"ExtendedEditor", "Market"}, "HideToolbar", std::vector<std::string>{"ExtendedEditor"}, sf::Vector2f(x + 32, y + 32), size, "greenButton.png", sf::Keyboard::Num4));
+	//Misc button
+	basicEditor_Options.push_back(new Option(util, "TriggerToolbar", std::vector<std::string>{"ExtendedEditor", "Terrain"}, "HideToolbar", std::vector<std::string>{"ExtendedEditor"}, sf::Vector2f(x, y + 64), size, "yellowButton.png", sf::Keyboard::Num5));
 	
-	sf::Vector2f pos = sf::Vector2f(-578, 209);
-	optionSet = basicEditor->AddOptionSet("BasicEditor", util);
-	optionSet->AddOption()
-		->WithActiveFunction("TriggerToolbar")
-		->WithActiveParams(std::vector<std::string>{"ExtendedEditor", "SocialClass"})
-		->WithPoition(pos)
-		->WithSize(sf::Vector2i(30, 30))
-		->WithInactiveFunction("HideToolbar")
-		->WithInactiveParams(std::vector<std::string>{"ExtendedEditor"})
-		->WithActiveImage("redButton.png")
-		->WithShortcut(sf::Keyboard::Num1);
-
-	optionSet->AddOption()
-		->WithActiveFunction("TriggerToolbar")
-		->WithActiveParams(std::vector<std::string>{"ExtendedEditor", "GenericBusiness"})
-		->WithPoition(sf::Vector2f(pos.x + 32, pos.y))
-		->WithSize(sf::Vector2i(30, 30))
-		->WithInactiveFunction("HideToolbar")
-		->WithInactiveParams(std::vector<std::string>{"ExtendedEditor"})
-		->WithActiveImage("blueButton.png")
-		->WithShortcut(sf::Keyboard::Num2);
-	optionSet->AddOption()
-		->WithActiveFunction("TriggerToolbar")
-		->WithActiveParams(std::vector<std::string>{"ExtendedEditor", "KeyBusiness"})
-		->WithPoition(sf::Vector2f(pos.x, pos.y + 32))
-		->WithSize(sf::Vector2i(30, 30))
-		->WithInactiveFunction("HideToolbar")
-		->WithInactiveParams(std::vector<std::string>{"ExtendedEditor"})
-		->WithActiveImage("cyanButton.png")
-		->WithShortcut(sf::Keyboard::Num3);
-
-	optionSet->AddOption()
-		->WithActiveFunction("TriggerToolbar")
-		->WithActiveParams(std::vector<std::string>{"ExtendedEditor", "Market"})
-		->WithPoition(sf::Vector2f(pos.x + 32, pos.y + 32))
-		->WithSize(sf::Vector2i(30, 30))
-		->WithInactiveFunction("HideToolbar")
-		->WithInactiveParams(std::vector<std::string>{"ExtendedEditor"})
-		->WithActiveImage("greenButton.png")
-		->WithShortcut(sf::Keyboard::Num4);
-	optionSet->AddOption()
-		->WithActiveFunction("TriggerToolbar")
-		->WithActiveParams(std::vector<std::string>{"ExtendedEditor", "Terrain"})
-		->WithPoition(sf::Vector2f(pos.x, pos.y + 64))
-		->WithSize(sf::Vector2i(30, 30))
-		->WithInactiveFunction("HideToolbar")
-		->WithInactiveParams(std::vector<std::string>{"ExtendedEditor"})
-		->WithActiveImage("yellowButton.png")
-		->WithShortcut(sf::Keyboard::Num5);
+	Toolbar* basicEditor = new Toolbar(sf::Vector2f(-585,200), sf::Vector2i(75,110),"BasicEditor.png", utility);
+	basicEditor->AddOptionSet("BasicEditor", basicEditor_Options);
+	toolBarMap->insert(std::pair<std::string, Toolbar*>("BasicEditor", basicEditor));
 
 
-	Toolbar* extendedEditor = CreateToolbar("ExtendedEditor")
-		->WithPosition(sf::Vector2f(-585, 315))
-		->WithSize(sf::Vector2i(300, 60))
-		->WithImage("ExtendedEditor.png");
+	//Residential toolbar
+	std::vector<Option*> residential_Options;
+	size = sf::Vector2i(48, 48);
+	sf::Vector2f pos = sf::Vector2f(-578, 321);
+	//Residential button
+	residential_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"ZONE_RESIDENTIAL"}, pos, size, "redButton.png", sf::Keyboard::Numpad1));
 
-	pos = sf::Vector2f(-578, 321);
-	optionSet = extendedEditor->AddOptionSet("SocialClass", util);
-	optionSet->AddOption()
-		->WithActiveFunction("SetMouseState")
-		->WithActiveParams("ZONE_LOWINCOME")
-		->WithPoition(pos)
-		->WithSize(sf::Vector2i(48, 48))
-		->WithActiveImage("redButton.png")
-		->WithShortcut(sf::Keyboard::Numpad1);
-	optionSet->AddOption()
-		->WithActiveFunction("SetMouseState")
-		->WithActiveParams("ZONE_MEDIUMINCOME")
-		->WithPoition(sf::Vector2f(pos.x + 51, pos.y))
-		->WithSize(sf::Vector2i(48, 48))
-		->WithActiveImage("redButton.png")
-		->WithShortcut(sf::Keyboard::Numpad2);
-	optionSet->AddOption()
-		->WithActiveFunction("SetMouseState")
-		->WithActiveParams("ZONE_HIGHINCOME")
-		->WithPoition(sf::Vector2f(pos.x + 102, pos.y))
-		->WithSize(sf::Vector2i(48, 48))
-		->WithActiveImage("redButton.png")
-		->WithShortcut(sf::Keyboard::Numpad3);
+	//GenericBusiness toolbar
+	std::vector<Option*> genericBusiness_Options;
+	//GenericBusiness button
+	genericBusiness_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"ZONE_GENERICBUSINESS"}, pos, size, "blueButton.png", sf::Keyboard::Numpad1));
 
-	optionSet = extendedEditor->AddOptionSet("GenericBusiness", util);
-	optionSet->AddOption()
-		->WithActiveFunction("SetMouseState")
-		->WithActiveParams("ZONE_GENERICBUSINESS")
-		->WithPoition(pos)
-		->WithSize(sf::Vector2i(48, 48))
-		->WithActiveImage("blueButton.png")
-		->WithShortcut(sf::Keyboard::Numpad1);
+	//KeyBusiness toolbar
+	std::vector<Option*> keyBusiness_Options;
+	//KeyBusiness button
+	keyBusiness_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"ZONE_KEYBUSINESS"}, pos, size, "cyanButton.png", sf::Keyboard::Numpad1));
 
-	optionSet = extendedEditor->AddOptionSet("KeyBusiness", util);
-	optionSet->AddOption()
-		->WithActiveFunction("SetMouseState")
-		->WithActiveParams("ZONE_KEYBUSINESS")
-		->WithPoition(pos)
-		->WithSize(sf::Vector2i(48, 48))
-		->WithActiveImage("cyanButton.png")
-		->WithShortcut(sf::Keyboard::Numpad1);
+	//Market toolbar
+	std::vector<Option*> market_Options;
+	//Market button
+	market_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"BUILD_HOUSE"}, "ClearMouse", std::vector<std::string>(), pos, size, "greenButton.png", sf::Keyboard::Numpad1));
+	market_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"BUILD_HOUSE1"}, "ClearMouse", std::vector<std::string>(), sf::Vector2f(pos.x + 51, pos.y), size, "greenButton.png", sf::Keyboard::Numpad2));
+	market_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"BUILD_HOUSE2"}, "ClearMouse", std::vector<std::string>(), sf::Vector2f(pos.x + 102, pos.y), size, "greenButton.png", sf::Keyboard::Numpad3));
+	market_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"BUILD_HOUSE3"}, "ClearMouse", std::vector<std::string>(), sf::Vector2f(pos.x + 153, pos.y), size, "greenButton.png", sf::Keyboard::Numpad4));
 
-	optionSet = extendedEditor->AddOptionSet("Market", util);
-	optionSet->AddOption()
-		->WithActiveFunction("SetMouseState")
-		->WithActiveParams("BUILD_HOUSE")
-		->WithPoition(pos)
-		->WithSize(sf::Vector2i(48, 48))
-		->WithActiveImage("greenButton.png")
-		->WithShortcut(sf::Keyboard::Numpad1)
-		->WithInactiveFunction("ClearMouse")
-		->WithInactiveParams("");
-	optionSet->AddOption()
-		->WithActiveFunction("SetMouseState")
-		->WithActiveParams("BUILD_HOUSE1")
-		->WithPoition(sf::Vector2f(pos.x + 51, pos.y))
-		->WithSize(sf::Vector2i(48, 48))
-		->WithActiveImage("greenButton.png")
-		->WithShortcut(sf::Keyboard::Numpad2)
-		->WithInactiveFunction("ClearMouse")
-		->WithInactiveParams("");
-	optionSet->AddOption()
-		->WithActiveFunction("SetMouseState")
-		->WithActiveParams("BUILD_HOUSE2")
-		->WithPoition(sf::Vector2f(pos.x + 102, pos.y))
-		->WithSize(sf::Vector2i(48, 48))
-		->WithActiveImage("greenButton.png")
-		->WithShortcut(sf::Keyboard::Numpad3)
-		->WithInactiveFunction("ClearMouse")
-		->WithInactiveParams("");
-	optionSet->AddOption()
-		->WithActiveFunction("SetMouseState")
-		->WithActiveParams("BUILD_HOUSE3")
-		->WithPoition(sf::Vector2f(pos.x + 153, pos.y))
-		->WithSize(sf::Vector2i(48, 48))
-		->WithActiveImage("greenButton.png")
-		->WithShortcut(sf::Keyboard::Numpad4)
-		->WithInactiveFunction("ClearMouse")
-		->WithInactiveParams("");
+	//Misc toolbar
+	std::vector<Option*> terrain_Options;
+	//Misc button
+	terrain_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"ZONE_DIRT"}, pos, size, "yellowButton.png", sf::Keyboard::Numpad1));
+	terrain_Options.push_back(new Option(util, "SetMouseState", std::vector<std::string>{"ZONE_ROAD"}, sf::Vector2f(pos.x + 51, pos.y), size, "yellowButton.png", sf::Keyboard::Numpad2));
 
-	optionSet = extendedEditor->AddOptionSet("Terrain", util);
-	optionSet->AddOption()
-		->WithActiveFunction("SetMouseState")
-		->WithActiveParams("ZONE_DIRT")
-		->WithPoition(pos)
-		->WithSize(sf::Vector2i(48, 48))
-		->WithActiveImage("yellowButton.png")
-		->WithShortcut(sf::Keyboard::Numpad1);
-	optionSet->AddOption()
-		->WithActiveFunction("SetMouseState")
-		->WithActiveParams("ZONE_ROAD")
-		->WithPoition(sf::Vector2f(pos.x + 51, pos.y))
-		->WithSize(sf::Vector2i(48, 48))
-		->WithActiveImage("yellowButton.png")
-		->WithShortcut(sf::Keyboard::Numpad2);
+	Toolbar* extendedEditor = new Toolbar(sf::Vector2f(-585, 315), sf::Vector2i(300, 60), "ExtendedEditor.png", utility);
+	extendedEditor->AddOptionSet("Residential", residential_Options);
+	extendedEditor->AddOptionSet("GenericBusiness", genericBusiness_Options);
+	extendedEditor->AddOptionSet("KeyBusiness", keyBusiness_Options);
+	extendedEditor->AddOptionSet("Market", market_Options);
+	extendedEditor->AddOptionSet("Terrain", terrain_Options);
+	toolBarMap->insert(std::pair<std::string, Toolbar*>("ExtendedEditor", extendedEditor));
 
 	return toolBarMap;
 }

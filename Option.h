@@ -19,13 +19,14 @@ private:
 	std::vector<std::string> _activeParams;
 	std::vector<std::string> _inactiveParams;
 	sf::Vector2f _position;
-	sf::Vector2i _size;
 	sf::Keyboard::Key _shortCut;
 	void Active();
 	void InActive();
 public:
 	Option();
-	Option(ToolbarUtility * u);
+	Option(ToolbarUtility* u, std::string f, std::vector<std::string> params, sf::Vector2f pos, sf::Vector2i size, std::string imageFile, sf::Keyboard::Key shortCut);
+	Option(ToolbarUtility* u, std::string active_function, std::vector<std::string> active_params, std::string inactive_function, std::vector<std::string> inactive_params, sf::Vector2f pos, sf::Vector2i size, std::string imageFile, sf::Keyboard::Key shortCut);
+	Option(ToolbarUtility* u, std::string active_function, std::vector<std::string> active_params, std::string inactive_function, std::vector<std::string> inactive_params, sf::Vector2f pos, sf::Vector2i size, std::string imageFile);
 	void Draw(sf::RenderWindow &Window);
 	void Update(sf::Vector2f camPos);
 	sf::Keyboard::Key GetShortCut() { return _shortCut; };
@@ -33,19 +34,6 @@ public:
 	void Click();
 	void SwitchingSelection() { InActive(); };
 	sf::RectangleShape GetButtonShape();
-
-	Option* WithActiveFunction(std::string functionName);
-	Option* WithActiveParams(std::vector<std::string> active_params);
-	Option* WithActiveParams(std::string active_params);
-	Option* WithInactiveFunction(std::string functionName);
-	Option* WithInactiveParams(std::vector<std::string> inactive_params);
-	Option* WithInactiveParams(std::string active_params);
-	Option* WithPoition(sf::Vector2f pos);
-	Option* WithSize(sf::Vector2i size);
-	Option* WithInactiveImage(std::string imageFile);
-	Option* WithActiveImage(std::string imageFile);
-	Option* WithShortcut(sf::Keyboard::Key shortCut);
-
 	~Option();
 };
 

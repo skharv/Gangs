@@ -34,11 +34,8 @@ private:
 	sf::Vector2f _mouseMoveStart;
 	void Build(std::string s);
 	void Zone(std::string s, std::vector<Tile*> t);
-	void SetTileIndex(std::string s, std::vector<Tile*> t);
-	int GetTileCode(std::string s);
-	int GetSocialClassCode(std::string s);
+	int GetZoneCode(std::string s);
 	void EditModeMouse(bool mouseIsPoint, sf::Vector2f mousePos, sf::RectangleShape shape);
-	std::string GetKeyString(std::string s);
 public:
 	void Update(sf::RenderWindow* Window);
 	void DrawOver(sf::RenderWindow &Window);

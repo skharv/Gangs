@@ -8,14 +8,12 @@
 class Tile
 {
 private:
-	enum SocialClass { high, medium, low };
 	std::map <Util::Direction, Tile *> _links;
 	int _index;
 	int _roadValue; //this name will change
 	sf::Vector2f _position;
 	sf::Color _colour;
 	bool _occupied;
-	SocialClass _socialClass;
 public:
 	void SetIndex(int i) { _index = i; };
 	int GetIndex() { return _index; };
@@ -28,9 +26,6 @@ public:
 
 	void AddConnection(Tile * tile, Util::Direction D);
 	Tile* GetConnection(Util::Direction D);
-
-	void SetSocialClass(SocialClass sc) { _socialClass = sc; };
-	SocialClass GetSocialClass() { return _socialClass; };
 
 	void SetColour(sf::Color c) { _colour = c; };
 	sf::Color GetColour() { return _colour; };

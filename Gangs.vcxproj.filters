@@ -54,14 +54,8 @@
     <ClCompile Include="Tile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Building.cpp">
+    <ClCompile Include="Structure.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MouseState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OptionSet.cpp">
-      <Filter>Source Files\Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,14 +89,8 @@
     <ClInclude Include="Tile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Building.h">
+    <ClInclude Include="Structure.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MouseState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OptionSet.h">
-      <Filter>Header Files\Menu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
