@@ -135,7 +135,8 @@ std::string Mouse::GetKeyString(std::string s){
 
 void Mouse::ClearMouse()
 {
-	_activeBuilding->CancelPlacement();
+	if(_activeBuilding != NULL)
+		_activeBuilding->CancelPlacement();
 	_mouseState = "";
 	_activeBuilding = NULL;
 }

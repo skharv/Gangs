@@ -1,2 +1,53 @@
-﻿  Option.cpp
+﻿  AStar.cpp
+d:\work in progress\gangs\gangs\astar.cpp(5): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\work in progress\gangs\gangs\astar.cpp(24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\work in progress\gangs\gangs\astar.cpp(31): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\work in progress\gangs\gangs\astar.cpp(34): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\work in progress\gangs\gangs\astar.cpp(62): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\work in progress\gangs\gangs\astar.cpp(63): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\work in progress\gangs\gangs\astar.cpp(104): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\work in progress\gangs\gangs\astar.cpp(110): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\work in progress\gangs\gangs\astar.cpp(115): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\work in progress\gangs\gangs\astar.cpp(121): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\work in progress\gangs\gangs\astar.cpp(122): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\work in progress\gangs\gangs\astar.cpp(123): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\work in progress\gangs\gangs\astar.cpp(158): warning C4018: '<': signed/unsigned mismatch
+d:\work in progress\gangs\gangs\astar.cpp(160): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\work in progress\gangs\gangs\astar.cpp(164): warning C4101: 'e': unreferenced local variable
   Gangs.vcxproj -> D:\Work In Progress\Gangs\Gangs\Debug\Gangs.exe

@@ -88,6 +88,7 @@ void Building::Draw(sf::RenderWindow &Window)
 
 Building::Building(std::string file)
 {
+	_highlightTiles = std::vector<Tile*>();
 	_texture.loadFromFile("images/" + file);
 	_sprite.setColor(sf::Color(255, 255, 255, 200));
 	_sprite.setOrigin(_texture.getSize().x / 2, _texture.getSize().y / 2);

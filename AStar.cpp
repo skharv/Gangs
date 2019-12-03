@@ -2,7 +2,8 @@
 
 bool AStar::isValid(int x, int y, Grid grid)
 {
-    if (!grid.GetTile(Utility::IsoGridToWorld(sf::Vector2f(x, y), grid.GetTileSize()))->GetOccupiedStatus())
+	Tile* t = grid.GetTile(Utility::IsoGridToWorld(sf::Vector2f(x, y), grid.GetTileSize()));
+    if (t != NULL && !t->GetOccupiedStatus())
 	{
         return true;
     } 
