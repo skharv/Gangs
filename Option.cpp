@@ -7,59 +7,92 @@ void Option::Draw(sf::RenderWindow &Window)
 
 Option::Option()
 {
+	_position = sf::Vector2f(0,0);
+	_size = sf::Vector2i(0, 0);
+	_texture.loadFromFile("images/blank.png");
+}
+
+Option::Option(ToolbarUtility * u)
+{
+	_util = u;
+	_position = sf::Vector2f(0, 0);
+	_size = sf::Vector2i(0, 0);
+	_texture.loadFromFile("images/blank.png");
+}
+
+Option* Option::WithActiveFunction(std::string functionName)
+{
+	_activefunction = functionName;
+	return this;
+}
+
+Option* Option::WithActiveParams(std::vector<std::string> active_params) 
+{
+	_activeParams = active_params;
+	return this;
+}
+
+Option* Option::WithActiveParams(std::string active_params)
+{
+	_activeParams = std::vector<std::string>{ active_params };
+	return this;
+}
+
+Option* Option::WithInactiveParams(std::string inactive_params)
+{
+	_inactiveParams = std::vector<std::string>{ inactive_params };
+	return this;
+}
+
+Option* Option::WithInactiveFunction(std::string functionName)
+{
+	_inactivefunction = functionName;
+	return this;
+}
+
+Option* Option::WithInactiveParams(std::vector<std::string> inactive_params)
+{
+	_inactiveParams = inactive_params;
+	return this;
+}
+
+Option* Option::WithPoition(sf::Vector2f pos)
+{
+	_position = pos;
+	return this;
+}
+
+Option* Option::WithSize(sf::Vector2i size) {
+	_size = size;
+	_sprite.setTextureRect(sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(_texture.getSize().x, _texture.getSize().y)));
+	float modX = float(_size.x) / float(_texture.getSize().x);
+	float modY = float(_size.y) / float(_texture.getSize().y);
+	_sprite.setTexture(_texture);
+	_sprite.setScale(sf::Vector2f(modX, modY));
+	return this;
+}
+
+Option* Option::WithActiveImage(std::string imageFile) {
+	_texture.loadFromFile("images/" + imageFile);
+	if (_size.x == 0 && _size.y == 0)
+		_size = sf::Vector2i(_texture.getSize().x, _texture.getSize().y);
+	_sprite.setTextureRect(sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(_texture.getSize().x, _texture.getSize().y)));
+	float modX = float(_size.x) / float(_texture.getSize().x);
+	float modY = float(_size.y) / float(_texture.getSize().y);
+	_sprite.setTexture(_texture);
+	_sprite.setScale(sf::Vector2f(modX, modY));
+	return this;
+}
+
+Option* Option::WithShortcut(sf::Keyboard::Key shortCut)
+{
+	_shortCut = shortCut;
+	return this;
 }
 
 void Option::Update(sf::Vector2f camPos)
 {
 	_sprite.setPosition(_position.x + camPos.x, _position.y + camPos.y);
-}
-
-Option::Option(ToolbarUtility* u, std::string active_function, std::vector<std::string> active_params, sf::Vector2f pos, sf::Vector2i size, std::string imageFile, sf::Keyboard::Key shortCut)
-{
-	_util = u;
-	_activefunction = active_function;
-	_activeParams = active_params;
-	_inactivefunction = "";
-	_position = pos;
-	_texture.loadFromFile("images/" + imageFile);
-	float modX = float(size.x) / float(_texture.getSize().x);
-	float modY = float(size.y) / float(_texture.getSize().y);
-	_sprite.setTexture(_texture);
-	_sprite.setScale(sf::Vector2f(modX, modY));
-	_shortCut = shortCut;
-}
-
-Option::Option(ToolbarUtility* u, std::string active_function, std::vector<std::string> active_params, std::string inactive_function, std::vector<std::string> inactive_params, sf::Vector2f pos, sf::Vector2i size, std::string imageFile, sf::Keyboard::Key shortCut)
-{
-	_util = u;
-	_activefunction = active_function;
-	_activeParams = active_params;
-	_inactivefunction = inactive_function;
-	_inactiveParams = inactive_params;
-	_position = pos;
-	_texture.loadFromFile("images/" + imageFile);
-	float modX = float(size.x) / float(_texture.getSize().x);
-	float modY = float(size.y) / float(_texture.getSize().y);
-	_sprite.setTexture(_texture);
-	_sprite.setScale(sf::Vector2f(modX, modY));
-	_shortCut = shortCut;
-}
-
-Option::Option(ToolbarUtility* u, std::string active_function, std::vector<std::string> active_params, std::string inactive_function, std::vector<std::string> inactive_params, sf::Vector2f pos, sf::Vector2i size, std::string imageFile)
-{
-	_util = u;
-	_activefunction = active_function;
-	_activeParams = active_params;
-	_inactivefunction = inactive_function;
-	_inactiveParams = inactive_params;
-	_sprite.setTextureRect(sf::IntRect(sf::Vector2i(0, 0), size));
-	_position = pos;
-	_texture.loadFromFile("images/" + imageFile);
-	float modX = float(size.x) / float(_texture.getSize().x);
-	float modY = float(size.y) / float(_texture.getSize().y);
-	_sprite.setTexture(_texture);
-	_sprite.setScale(sf::Vector2f(modX, modY));
-	_shortCut = sf::Keyboard::Escape;
 }
 
 void Option::Active()
