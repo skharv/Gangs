@@ -4,6 +4,7 @@
 #include <SFML\Graphics.hpp>
 
 
+#include "Unit.h"
 #include "Camera.h"
 #include "Grid.h"
 #include "Utility.h"
@@ -20,6 +21,8 @@ private:
 
 	Grid *_grid;
 	//Grid *_squareGrid;
+
+	Unit *_unit;
 
 	Mouse *_mouse;
 
