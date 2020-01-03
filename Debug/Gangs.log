@@ -1,53 +1,37 @@
-﻿  AStar.cpp
-d:\work in progress\gangs\gangs\astar.cpp(5): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+﻿  Engine.cpp
+d:\simon\documents\github\gangs\gangs\unit.h(77): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-d:\work in progress\gangs\gangs\astar.cpp(24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\work in progress\gangs\gangs\astar.cpp(31): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+d:\simon\documents\github\gangs\gangs\engine.cpp(75): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\simon\documents\github\gangs\gangs\engine.cpp(77): warning C4305: 'argument': truncation from 'double' to 'float'
+  Main.cpp
+d:\simon\documents\github\gangs\gangs\unit.h(77): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-d:\work in progress\gangs\gangs\astar.cpp(34): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+d:\simon\documents\github\gangs\gangs\main.cpp(11): warning C4101: 'e': unreferenced local variable
+  Unit.cpp
+d:\simon\documents\github\gangs\gangs\unit.h(77): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-d:\work in progress\gangs\gangs\astar.cpp(62): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+d:\simon\documents\github\gangs\gangs\unit.cpp(33): warning C4018: '>=': signed/unsigned mismatch
+d:\simon\documents\github\gangs\gangs\unit.cpp(46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\simon\documents\github\gangs\gangs\unit.cpp(214): warning C4018: '<': signed/unsigned mismatch
+d:\simon\documents\github\gangs\gangs\unit.cpp(248): warning C4018: '<': signed/unsigned mismatch
+d:\simon\documents\github\gangs\gangs\unit.cpp(277): warning C4018: '<': signed/unsigned mismatch
+d:\simon\documents\github\gangs\gangs\unit.cpp(319): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=float
           ]
-d:\work in progress\gangs\gangs\astar.cpp(63): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
+          and
           [
-              T=float
+              T=int
           ]
-d:\work in progress\gangs\gangs\astar.cpp(104): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-d:\work in progress\gangs\gangs\astar.cpp(110): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-d:\work in progress\gangs\gangs\astar.cpp(115): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-d:\work in progress\gangs\gangs\astar.cpp(121): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-d:\work in progress\gangs\gangs\astar.cpp(122): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-d:\work in progress\gangs\gangs\astar.cpp(123): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-d:\work in progress\gangs\gangs\astar.cpp(158): warning C4018: '<': signed/unsigned mismatch
-d:\work in progress\gangs\gangs\astar.cpp(160): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-d:\work in progress\gangs\gangs\astar.cpp(164): warning C4101: 'e': unreferenced local variable
-  Gangs.vcxproj -> D:\Work In Progress\Gangs\Gangs\Debug\Gangs.exe
+  Generating Code...
+  Gangs.vcxproj -> D:\Simon\Documents\GitHub\Gangs\Debug\Gangs.exe
