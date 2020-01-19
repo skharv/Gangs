@@ -20,11 +20,16 @@ void Unit::Update()
 	switch (_state)
 	{
 	case IDLE:
+		_animationFrame = 0;
 		break;
 	case MOVE:
 		_distance = 0;
+			if (++_animationFrame >= (_texture.getSize().y / 32))
+				_animationFrame = 0;
+			_animationCounter = 0;
+		}
 		if(!_destination.empty())
-			_distance = GetMagnitude(_destination.back() - _position);
+		  _distance = GetMagnitude(_destination.back() - _position);
 
 		if (_distance > _stopDistance)
 		{
@@ -61,7 +66,9 @@ void Unit::Update()
 
 	_sprite.setPosition(_position);
 	_sprite.setScale(1, 1);
-	sf::IntRect Rect = sf::IntRect(0, 0, 16, 32);
+
+	sf::IntRect Rect = sf::IntRect(0, _animationFrame * 32, 16, 32);
+
 	//ewwwwww....
 	if (_rotation < -168.75)
 	{
@@ -286,34 +293,6 @@ void Unit::Move(Grid grid, sf::Vector2f dest, bool queue)
 	_target = this;
 
 	_destination = AStar::aStar(Utility::IsoWorldToGrid(GetPosition(), grid.GetTileSize()), Utility::IsoWorldToGrid(dest, grid.GetTileSize()), grid);
-
-	//if (!queue)
-	//{
-	//	for (int i = 0; i < _destination.size(); i++)
-	//		_destination.pop();
-	//	_destination.push(dest);
-	//}
-	//else
-	//{
-	//	std::stack<sf::Vector2f> intermediary;
-
-	//	int size = _destination.size();
-
-	//	for (int i = 0; i < size; i++)
-	//	{
-	//		intermediary.push(_destination.top());
-	//		_destination.pop();
-	//	}
-
-	//	intermediary.push(dest);
-	//	size = intermediary.size();
-
-	//	for (int i = 0; i < size; i++)
-	//	{
-	//		_destination.push(intermediary.top());
-	//		intermediary.pop();
-	//	}
-	//}
 }
 
 void Unit::Target(Unit * o)

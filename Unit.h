@@ -10,6 +10,7 @@
 #include "Drawable.h"
 
 #define DEFAULTFORWARD sf::Vector2f(0, -1)
+#define ANIMFRAMES 3
 
 enum States
 {
@@ -36,7 +37,7 @@ private:
 	sf::Vector2f				_forward;
 	sf::Vector2f				_neighbourInfluence;
 
-	float 						_moveSpeed = 5;
+	float 						_moveSpeed = 2.5;
 	float 						_steerSpeed = 5;
 	float						_rotation = 0;
 	float						_attackRange = 300.0f;
