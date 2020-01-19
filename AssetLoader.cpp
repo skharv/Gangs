@@ -21,7 +21,7 @@ std::map <std::string, Unit*>* AssetLoader::CreateUnitPatterns()
 	unitPatterns->insert(std::pair<std::string, Unit*>("BASIC", u));
 
 	u = new Unit("images/agileUnit.png", sf::Vector2f(16, 32));
-	u->SetMoveSpeed(8);
+	u->SetMoveSpeed(4);
 	u->SetSteerSpeed(7);
 	unitPatterns->insert(std::pair<std::string, Unit*>("AGILE", u));
 

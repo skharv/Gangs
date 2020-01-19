@@ -47,6 +47,9 @@ private:
 
 	// Unit Stats:
 	int							_playerNumber;
+	int							_animationCounter;
+	int							_animationFrame;
+
 	States						_state = IDLE;
 	float 						_currentHealth;
 	float 						_healthTotal;

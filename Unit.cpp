@@ -24,10 +24,11 @@ void Unit::Update()
 		break;
 	case MOVE:
 		_distance = 0;
-			if (++_animationFrame >= (_texture.getSize().y / 32))
-				_animationFrame = 0;
-			_animationCounter = 0;
-		}
+
+		if (++_animationFrame >= (_texture.getSize().y / 32))
+			_animationFrame = 0;
+		_animationCounter = 0;
+
 		if(!_destination.empty())
 		  _distance = GetMagnitude(_destination.back() - _position);
 
