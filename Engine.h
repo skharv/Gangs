@@ -21,9 +21,7 @@ private:
 
 	Grid *_grid;
 	//Grid *_squareGrid;
-
-	Unit *_unit;
-
+	
 	Mouse *_mouse;
 
 	Utility *_utility;

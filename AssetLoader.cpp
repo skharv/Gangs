@@ -13,6 +13,21 @@ AssetLoader::~AssetLoader()
 {
 }
 
+std::map <std::string, Unit*>* AssetLoader::CreateUnitPatterns()
+{
+	std::map <std::string, Unit*>* unitPatterns = new std::map <std::string, Unit*>();
+
+	Unit* u = new Unit("images/basicUnit.png", sf::Vector2f(16, 32));
+	unitPatterns->insert(std::pair<std::string, Unit*>("BASIC", u));
+
+	u = new Unit("images/agileUnit.png", sf::Vector2f(16, 32));
+	u->SetMoveSpeed(8);
+	u->SetSteerSpeed(7);
+	unitPatterns->insert(std::pair<std::string, Unit*>("AGILE", u));
+
+	return unitPatterns;
+}
+
 std::map <std::string, Building*>* AssetLoader::CreateBuildingPatterns()
 {
 	std::map <std::string, Building*>* buildingPatterns = new std::map <std::string, Building*>();
@@ -57,11 +72,11 @@ std::map <std::string, Toolbar*>* AssetLoader::CreateToolbars()
 	OptionSet* optionSet = EditorUI->AddOptionSet("EditorUI", util);
 
 	optionSet->AddOption()
-		->WithActiveFunction("TriggerToolbar")
+		->WithActiveFunction("ToggleEditor")
 		->WithActiveParams(std::vector<std::string>{"BasicEditor", "BasicEditor"})
 		->WithShortcut(sf::Keyboard::E)
-		->WithInactiveFunction("HideToolbar")
-		->WithInactiveParams(std::vector<std::string>{"BasicEditor"});
+		->WithInactiveFunction("ToggleEditor")
+		->WithInactiveParams(std::vector<std::string>{"BasicEditor", "BasicEditor"});
 
 	EditorUI->ShowToolbar("EditorUI");
 	EditorUI->SetInvisible();
@@ -85,7 +100,7 @@ std::map <std::string, Toolbar*>* AssetLoader::CreateToolbars()
 
 	optionSet->AddOption()
 		->WithActiveFunction("TriggerToolbar")
-		->WithActiveParams(std::vector<std::string>{"ExtendedEditor", "GenericBusiness"})
+		->WithActiveParams(std::vector<std::string>{"ExtendedEditor", "Units"})
 		->WithPoition(sf::Vector2f(pos.x + 32, pos.y))
 		->WithSize(sf::Vector2i(30, 30))
 		->WithInactiveFunction("HideToolbar")
@@ -151,14 +166,22 @@ std::map <std::string, Toolbar*>* AssetLoader::CreateToolbars()
 		->WithActiveImage("redButton.png")
 		->WithShortcut(sf::Keyboard::Numpad3);
 
-	optionSet = extendedEditor->AddOptionSet("GenericBusiness", util);
+	optionSet = extendedEditor->AddOptionSet("Units", util);
 	optionSet->AddOption()
 		->WithActiveFunction("SetMouseState")
-		->WithActiveParams("ZONE_GENERICBUSINESS")
+		->WithActiveParams("CREATE_BASIC")
 		->WithPoition(pos)
 		->WithSize(sf::Vector2i(48, 48))
 		->WithActiveImage("blueButton.png")
 		->WithShortcut(sf::Keyboard::Numpad1);
+	optionSet->AddOption()
+		->WithActiveFunction("SetMouseState")
+		->WithActiveParams("CREATE_AGILE")
+		->WithPoition(sf::Vector2f(pos.x + 51, pos.y))
+		->WithSize(sf::Vector2i(48, 48))
+		->WithActiveImage("blueButton.png")
+		->WithShortcut(sf::Keyboard::Numpad2);
+
 
 	optionSet = extendedEditor->AddOptionSet("KeyBusiness", util);
 	optionSet->AddOption()

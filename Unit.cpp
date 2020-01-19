@@ -1,10 +1,5 @@
 #include "Unit.h"
 
-void Unit::Draw(sf::RenderWindow & Window)
-{
-	Window.draw(_sprite);
-}
-
 void Unit::Update()
 {
 	float _distance;
@@ -16,7 +11,8 @@ void Unit::Update()
 
 		if (GetMagnitude(_target->GetPosition() - _position) < _attackRange && _target->GetPlayerNumber() != _playerNumber)
 			_state = ATTACK;
-		_destination.pop_back();
+		if (!_destination.empty())
+			_destination.pop_back();
 		_destination.push_back(_target->GetPosition());
 
 	}
@@ -26,7 +22,9 @@ void Unit::Update()
 	case IDLE:
 		break;
 	case MOVE:
-		_distance = GetMagnitude(_destination.back() - _position);
+		_distance = 0;
+		if(!_destination.empty())
+			_distance = GetMagnitude(_destination.back() - _position);
 
 		if (_distance > _stopDistance)
 		{
@@ -194,7 +192,7 @@ sf::Vector2f Unit::Seek(sf::Vector2f v)
 	return _newVelocity;
 }
 
-void Unit::Separation(std::vector<Unit*> units)
+void Unit::Separation(std::vector<Unit> units)
 {
 	float separationDist = 50.0f;
 	sf::Vector2f influence(0, 0);
@@ -202,12 +200,12 @@ void Unit::Separation(std::vector<Unit*> units)
 
 	for (int i = 0; i < units.size(); i++)
 	{
-		float distance = GetMagnitude(units[i]->GetPosition() - _position);
+		float distance = GetMagnitude(units[i].GetPosition() - _position);
 
 		if (distance > 0 && distance < separationDist)
 		{
 			sf::Vector2f diff(0, 0);
-			diff = _position - units[i]->GetPosition();
+			diff = _position - units[i].GetPosition();
 			diff = Normalise(diff);
 			diff = sf::Vector2f(diff.x / distance, diff.y / distance);
 			influence += diff;
@@ -229,18 +227,18 @@ void Unit::Separation(std::vector<Unit*> units)
 	}
 }
 
-void Unit::Alignment(std::vector<Unit*> units)
+void Unit::Alignment(std::vector<Unit> units)
 {
 	sf::Vector2f sum(0, 0);
 
 	int count = 0;
 	for (int i = 0; i < units.size(); i++)
 	{
-		float distance = GetMagnitude(units[i]->GetPosition() - _position);
+		float distance = GetMagnitude(units[i].GetPosition() - _position);
 
 		if (distance > 0 && distance < _neighbourDistance)
 		{
-			sum += units[i]->GetVelocity();
+			sum += units[i].GetVelocity();
 			count++;
 		}
 	}
@@ -258,18 +256,18 @@ void Unit::Alignment(std::vector<Unit*> units)
 	}
 }
 
-void Unit::Cohesion(std::vector<Unit*> units)
+void Unit::Cohesion(std::vector<Unit> units)
 {
 	sf::Vector2f sum(0, 0);
 
 	int count = 0;
 	for (int i = 0; i < units.size(); i++)
 	{
-		float distance = GetMagnitude(units[i]->GetPosition() - _position);
+		float distance = GetMagnitude(units[i].GetPosition() - _position);
 
 		if (distance > 0 && distance < _neighbourDistance)
 		{
-			sum += units[i]->GetPosition();
+			sum += units[i].GetPosition();
 			count++;
 		}
 	}
@@ -342,8 +340,47 @@ Unit::Unit(std::string TextureLocation, sf::Vector2f Size)
 	_sprite.setTexture(_texture);
 	_sprite.setTextureRect(Rect);
 	_sprite.setOrigin(_origin);
+	_placed = false;
+	_target = nullptr;
 }
 
+void Unit::PlacementUpdate(Tile* t)
+{
+	if(_highlightTile != NULL)
+		_highlightTile->SetColour(sf::Color::White);
+
+	if (t != NULL)
+	{
+		_highlightTile = t;
+		_sprite.setPosition(t->GetPosition());
+		_position = t->GetPosition();
+		if (t == NULL || t->GetOccupiedStatus())
+		{
+			t->SetColour(sf::Color::Red);
+			_validLocation = false;
+		}
+		else
+		{
+			t->SetColour(sf::Color::Green);
+			_validLocation = true;
+		}
+	}
+}
+
+void Unit::CancelPlacement()
+{
+	_highlightTile->SetColour(sf::Color::White);
+}
+
+void Unit::PlaceUnit()
+{
+	if (_validLocation)
+	{
+		_placed = true;
+		_sprite.setColor(sf::Color::White);
+		_highlightTile->SetColour(sf::Color::White);
+	}
+}
 
 Unit::~Unit()
 {

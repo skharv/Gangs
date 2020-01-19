@@ -7,6 +7,7 @@
 #include "Utility.h"
 #include "AStar.h"
 #include "Grid.h"
+#include "Drawable.h"
 
 #define DEFAULTFORWARD sf::Vector2f(0, -1)
 
@@ -17,7 +18,7 @@ enum States
 	ATTACK = 2
 };
 
-class Unit
+class Unit : public Drawable
 {
 private:
 	Unit					   *_target = this;
@@ -51,17 +52,14 @@ private:
 	float						_healthPoint;
 	float 						_buildTime;
 
-	// What you see:
-	sf::Texture					_texture;
-	sf::Sprite					_sprite;
-
 	// Private functions:
 	float						GetMagnitude(sf::Vector2f v);
 	sf::Vector2f				Normalise(sf::Vector2f v);
 	sf::Vector2f				Truncate(sf::Vector2f v, float max);
 	sf::Vector2f				Seek(sf::Vector2f v);
+
+	Tile*						_highlightTile;
 public:
-	void Draw(sf::RenderWindow &Window);
 	void Update();
 
 	int GetPlayerNumber() { return _playerNumber; };
@@ -72,13 +70,22 @@ public:
 	sf::Vector2f GetVelocity() { return _velocity; };
 
 	void SetPosition(int x, int y) { _position = sf::Vector2f(x, y); };
+	void SetMoveSpeed(float val) { _moveSpeed = val; };
+	void SetSteerSpeed(float val) { _steerSpeed = val; };
 
-	void Separation(std::vector<Unit*> units);
-	void Alignment(std::vector<Unit*> units);
-	void Cohesion(std::vector<Unit*> units);
+	void Separation(std::vector<Unit> units);
+	void Alignment(std::vector<Unit> units);
+	void Cohesion(std::vector<Unit> units);
 
 	void Move(Grid grid, sf::Vector2f dest, bool queue);
 	void Target(Unit *o);
+
+	void PlaceUnit();
+	void CancelPlacement();
+	void PlacementUpdate(Tile* t);
+	bool ValidPlacement() { return _validLocation; };
+
+	sf::Sprite GetSprite() { return _sprite; };
 
 	Unit();
 	Unit(Unit * u);

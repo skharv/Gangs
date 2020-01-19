@@ -17,6 +17,7 @@ public:
 	ToolbarUtility* util;
 	std::map <std::string, Toolbar*>* CreateToolbars();
 	std::map <std::string, Building*>* CreateBuildingPatterns();
+	std::map <std::string, Unit*>* CreateUnitPatterns();
 	AssetLoader();
 	AssetLoader(ToolbarUtility *_toolbarUtility);
 	~AssetLoader();

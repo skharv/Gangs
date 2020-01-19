@@ -1,6 +1,7 @@
 d:\work in progress\gangs\gangs\debug\vc141.pdb
 d:\work in progress\gangs\gangs\debug\vc141.idb
 d:\work in progress\gangs\gangs\debug\utility.obj
+d:\work in progress\gangs\gangs\debug\unit.obj
 d:\work in progress\gangs\gangs\debug\toolbarutility.obj
 d:\work in progress\gangs\gangs\debug\toolbar.obj
 d:\work in progress\gangs\gangs\debug\tile.obj
@@ -13,6 +14,7 @@ d:\work in progress\gangs\gangs\debug\grid.obj
 d:\work in progress\gangs\gangs\debug\engine.obj
 d:\work in progress\gangs\gangs\debug\camera.obj
 d:\work in progress\gangs\gangs\debug\building.obj
+d:\work in progress\gangs\gangs\debug\astar.obj
 d:\work in progress\gangs\gangs\debug\assetloader.obj
 d:\work in progress\gangs\gangs\debug\gangs.exe
 d:\work in progress\gangs\gangs\debug\gangs.ilk

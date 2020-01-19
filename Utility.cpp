@@ -71,6 +71,14 @@ sf::Vector2f Utility::SquareGridToWorld(sf::Vector2f GridPosition, sf::Vector2f 
 	return WorldPosition;
 }
 
+sf::RectangleShape Utility::ConvertToRectShape(sf::Sprite s)
+{
+	sf::RectangleShape rectShape;
+	rectShape.setPosition(s.getPosition());
+	rectShape.setSize(sf::Vector2f(s.getTextureRect().height, s.getTextureRect().width));
+	return rectShape;
+}
+
 bool Utility::RectPoint(sf::RectangleShape rect, sf::Vector2f point)
 {
 	if (rect.getSize().x == 0 && rect.getSize().y == 0)

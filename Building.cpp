@@ -74,18 +74,6 @@ void Building::SetFootprint(std::vector<Util::Direction> footprint)
 	_footprint = footprint;
 }
 
-void Building::Draw(sf::RenderWindow &Window)
-{
-	if (!_placed)
-	{
-		if (_validLocation)
-			_sprite.setColor(sf::Color(255, 255, 255, 200));
-		else
-			_sprite.setColor(sf::Color(174, 25, 7, 200));
-	}
-	Window.draw(_sprite);
-}
-
 Building::Building(std::string file)
 {
 	_highlightTiles = std::vector<Tile*>();

@@ -14,13 +14,11 @@ bool Engine::Init()
 	_grid = new Grid(gr::ISOMETRIC, sf::Vector2f(100, 100), sf::Vector2f(64, 32));
 	//_squareGrid = new Grid(gr::SQUARE, sf::Vector2f(400, 200), sf::Vector2f(16, 16));
 
-	_unit = new Unit("images/basicUnit.png", sf::Vector2f(16, 32));
-	_unit->SetPosition(150, 0);
-
 	// Set up the utility class (which should probably be static instead)
 	_utility = new Utility();
 	_utility->setGridTileSize(_grid->GetTileSize());
 	_utility->setGridSize(_grid->GetGridSize());
+	_utility->setGameState(Util::GameState::InGame);
 
 	// Set the mouse with it's image
 	_toolbarUtility = new ToolbarUtility(_grid, _utility);
@@ -31,6 +29,7 @@ bool Engine::Init()
 	_assetLoader = new AssetLoader(_toolbarUtility);
 	_toolbarUtility->SetToolbarReferences(_assetLoader->CreateToolbars());
 	_mouse->SetBuildingPatterns(_assetLoader->CreateBuildingPatterns());
+	_mouse->SetUnitPatterns(_assetLoader->CreateUnitPatterns());
 
 	if (!_window)
 		return false;
@@ -60,9 +59,9 @@ void Engine::ProcessInput()
 		if (evt.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			_window->close();
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+		if (evt.type == sf::Event::MouseButtonReleased && evt.mouseButton.button == sf::Mouse::Right)
 		{
-			_unit->Move(*_grid, _window->mapPixelToCoords(sf::Mouse::getPosition(*_window)), true);
+			_mouse->RightClick(*_window); 
 		}
 
 		if (evt.type == sf::Event::KeyPressed)
@@ -84,11 +83,7 @@ void Engine::ProcessInput()
 		if (evt.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
 			_mouse->MouseDown(*_window);
-		}
 
-		if (evt.type == sf::Event::MouseButtonReleased && evt.mouseButton.button == sf::Mouse::Right)
-		{
-			_mouse->ClearMouse();
 		}
 
 		if (evt.type == sf::Event::MouseButtonReleased && evt.mouseButton.button == sf::Mouse::Middle)
@@ -103,7 +98,6 @@ void Engine::Update()
 	_camera->Update(*_window);
 	_toolbarUtility->Update(_camera->GetPosition());
 	_mouse->Update(_window);
-	_unit->Update();
 	//update UI positions based on camera
 }
 
@@ -122,7 +116,6 @@ void Engine::RenderFrame()
 	//UI Mouse
 	//_mouse->DrawOver(*_window);
 	_camera->setGridView(*_window);
-	_unit->Draw(*_window);
 
 	_window->display();
 }

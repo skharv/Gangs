@@ -11,6 +11,7 @@ void Mouse::Update(sf::RenderWindow* Window)
 {
 	sf::Vector2f mousePos = Window->mapPixelToCoords(sf::Mouse::getPosition(*Window));
 
+	_position = mousePos;
 	_position = _utility->IsoGridToWorld(_utility->IsoWorldToGrid(mousePos, _utility->getGridTileSize()), _utility->getGridTileSize());
 
 	if (_mousePressed && (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)))
@@ -18,7 +19,7 @@ void Mouse::Update(sf::RenderWindow* Window)
 	else if (_mousePressed)
 	{
 		_mouseSelect.setSize(sf::Vector2f(_mouseSelect.getPosition().x - mousePos.x, _mouseSelect.getPosition().y - mousePos.y));
-		
+
 		std::vector<sf::Vector2f> points = _grid->IsoGetTileCorners(_mouseSelect); //Using _mouseSelect is not super accurate for this purpose so it'll need to be updated, but whatever. It could be the iso tile bullshit not being accurate too. 
 		_tileSelect.setPointCount(points.size()); // Probably not needed
 		for (int i = 0; i < _tileSelect.getPointCount(); i++)
@@ -40,6 +41,8 @@ void Mouse::Update(sf::RenderWindow* Window)
 	}
 	if (_mouseState.substr(0, 5) == "BUILD")
 		_activeBuilding->PlacementUpdate(_grid->GetTile(mousePos));
+	if (_mouseState.substr(0, 6) == "CREATE")
+		_activeUnit->PlacementUpdate(_grid->GetTile(mousePos));
 	//_pointerSprite.setPosition(_position);
 }
 
@@ -48,9 +51,15 @@ void Mouse::DrawUnder(sf::RenderWindow &Window)
 	//if (_mousePressed)
 	//	Window.draw(_mouseSelect);
 	//else
-	Window.draw(_tileSelect);
+	if (_utility->getGameState() == Util::GameState::Editor)
+		Window.draw(_tileSelect);
+	else
+		Window.draw(_mouseSelect);
 	if (_mouseState.substr(0, 5) == "BUILD")
 		_activeBuilding->Draw(Window);
+	if (_mouseState.substr(0, 6) == "CREATE")
+		_activeUnit->Draw(Window);
+
 }
 
 void Mouse::MouseMoveDown(sf::RenderWindow & Window)
@@ -81,6 +90,14 @@ void Mouse::MouseUp()
 	_mousePressed = false;
 }
 
+void Mouse::RightClick(sf::RenderWindow& Window)
+{
+	if(_utility->getGameState() == Util::GameState::Editor)
+		ClearMouse();
+	else
+		MoveUnits(Window.mapPixelToCoords(sf::Mouse::getPosition(Window)));
+}
+
 void Mouse::Click(sf::RenderWindow& Window)
 {
 	sf::Vector2f mousePos = Window.mapPixelToCoords(sf::Mouse::getPosition(Window));
@@ -96,8 +113,10 @@ void Mouse::Click(sf::RenderWindow& Window)
 
 	if (!_toolbarUtility->CheckButtonClick(uiMousePos, mouseIsPoint))
 	{
-		//eventually check for game mode and send it to the relevant mouse action
-		EditModeMouse(mouseIsPoint, mousePos, _mouseSelect);
+		if (_utility->getGameState() == Util::GameState::Editor)
+			EditModeMouse(mouseIsPoint, mousePos, _mouseSelect);
+		else
+			GameModeMouse(mouseIsPoint, mousePos, _mouseSelect);
 	}
 
 	_mouseSelect.setSize(sf::Vector2f(0, 0));
@@ -106,6 +125,11 @@ void Mouse::Click(sf::RenderWindow& Window)
 void Mouse::SetBuildingPatterns(std::map<std::string, Building*>* b)
 {
 	_buildingPatterns = b;
+}
+
+void Mouse::SetUnitPatterns(std::map<std::string, Unit*>* u)
+{
+	_unitPatterns = u;
 }
 
 void Mouse::EditModeMouse(bool mouseIsPoint, sf::Vector2f mousePos, sf::RectangleShape shape)
@@ -126,6 +150,44 @@ void Mouse::EditModeMouse(bool mouseIsPoint, sf::Vector2f mousePos, sf::Rectangl
 				_toolbarUtility->AddBuilding(*_activeBuilding);
 			}
 		}
+		if (_mouseState.substr(0, 6) == "CREATE")
+		{
+			if (_activeUnit->ValidPlacement())
+			{
+				_toolbarUtility->AddUnit(*_activeUnit);
+			}
+		}
+	}
+}
+
+void Mouse::GameModeMouse(bool mouseIsPoint, sf::Vector2f mousePos, sf::RectangleShape shape)
+{
+	_selectedUnits.clear();
+	for (int x = 0; x < _toolbarUtility->GetAllUnits()->size(); x++)
+	{
+		if (mouseIsPoint)
+		{
+			if (_utility->RectPoint(_utility->ConvertToRectShape(_toolbarUtility->GetAllUnits()->at(x).GetSprite()), mousePos))
+				_selectedUnits.push_back(&_toolbarUtility->GetAllUnits()->at(x));
+		}
+		else
+		{
+			if (_utility->RectRect(shape, _utility->ConvertToRectShape(_toolbarUtility->GetAllUnits()->at(x).GetSprite())))
+			{
+				_selectedUnits.push_back(&_toolbarUtility->GetAllUnits()->at(x));
+				if (mouseIsPoint)
+					break;
+			}
+		}
+	}
+	//then check buildings and 
+}
+
+void Mouse::MoveUnits(sf::Vector2f pos)
+{
+	for (int x = 0; x < _selectedUnits.size(); x++)
+	{
+		_selectedUnits.at(x)->Move(*_grid, pos, true);
 	}
 }
 
@@ -137,8 +199,11 @@ void Mouse::ClearMouse()
 {
 	if(_activeBuilding != NULL)
 		_activeBuilding->CancelPlacement();
+	if (_activeUnit != NULL)
+		_activeUnit->CancelPlacement();
 	_mouseState = "";
 	_activeBuilding = NULL;
+	_activeUnit - NULL;
 }
 
 void Mouse::SetMouseState(std::string state)
@@ -146,6 +211,8 @@ void Mouse::SetMouseState(std::string state)
 	_mouseState = state;
 	if (_mouseState.substr(0, 5) == "BUILD")
 		Build(_mouseState.substr(6, _mouseState.length()));
+	if (_mouseState.substr(0, 6) == "CREATE")
+		Create(_mouseState.substr(7, _mouseState.length()));
 }
 
 void Mouse::Zone(std::string s, std::vector<Tile*> t)
@@ -179,6 +246,11 @@ void Mouse::SetTileIndex(std::string s, std::vector<Tile*> t)
 	}
 }
 
+void Mouse::Create(std::string s)
+{
+	_activeUnit = _unitPatterns->at(s);
+}
+
 void Mouse::Build(std::string s)
 {
 	_activeBuilding = _buildingPatterns->at(s);
@@ -197,6 +269,7 @@ Mouse::Mouse(Utility* utility, ToolbarUtility* toolbarUtil, Grid* grid, Camera* 
 	_toolbarUtility = toolbarUtil;
 	_utility = utility;
 	_activeBuilding = NULL;
+	_activeUnit = NULL;
 	//_texture.loadFromFile(FilePath);
 	//_pointerSprite.setTexture(_texture);
 	//_pointerSprite.setOrigin(_texture.getSize().x / 2, _texture.getSize().y / 2);
