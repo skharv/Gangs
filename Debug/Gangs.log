@@ -1,7 +1,1 @@
-﻿  AssetLoader.cpp
-d:\work in progress\gangs\gangs\unit.h(76): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-  Gangs.vcxproj -> D:\Work In Progress\Gangs\Gangs\Debug\Gangs.exe
+﻿  Gangs.vcxproj -> D:\Simon\Documents\GitHub\Gangs\Debug\Gangs.exe
